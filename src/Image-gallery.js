@@ -17,7 +17,6 @@ class ImageGallery extends LitElement {
       min-height: 250px; /* Ensures visibility while loading/on error */
       padding: 16px;
       box-sizing: border-box;
-      background-color: #f8f8f8;
       border-radius: 8px;
     }
 
@@ -54,13 +53,17 @@ class ImageGallery extends LitElement {
 
   static properties = {
     galleryName: { type: String, attribute: 'gallery-name' },
-    imageFiles: { state: true }
+    imageFiles: { state: true },
+    globalVar: { type: String, attribute: 'global-var' },  // Optional: Name of global variable to update
+    stateUpdate: { type: Boolean, attribute: 'state-update' }  // Whether to dispatch state update event
   };
 
   constructor() {
     super();
     this.galleryName = '';  // e.g., 'gallery-potatoes'
     this.imageFiles = [];
+    this.globalVar = '';
+    this.stateUpdate = false;
   }
 
   // Helper function to extract the actual folder name (e.g., 'potatoes')
@@ -122,6 +125,25 @@ class ImageGallery extends LitElement {
             src="/${ASSET_BASE_PATH}/${subfolder}/${filename}" 
             alt="${this.galleryName} image: ${filename}"
             loading="lazy"
+            data-image-id="${filename}"
+            @click=${() => {
+              // Update global variable if specified
+              if (this.globalVar) {
+                window[this.globalVar] = filename;
+                console.log(`Updated ${this.globalVar} to:`, window[this.globalVar]);
+              }
+              
+              // Dispatch custom event for framework state management
+              this.dispatchEvent(new CustomEvent('image-select', {
+                detail: { 
+                  imageId: filename,
+                  value: filename  // 'value' provided for framework consistency
+                },
+                bubbles: true,
+                composed: true
+              }));
+            }}
+            style="cursor: ${this.globalVar ? 'pointer' : 'default'}"
           />
         `)}
       </div>

@@ -18,6 +18,7 @@ class ImageGallery extends LitElement {
       padding: 16px;
       box-sizing: border-box;
       border-radius: 8px;
+      transition: .2s all ease-in-out; /* Smooth transition for any property changes */
     }
 
     /* 2. Gallery Layout */
@@ -54,16 +55,15 @@ class ImageGallery extends LitElement {
   static properties = {
     galleryName: { type: String, attribute: 'gallery-name' },
     imageFiles: { state: true },
-    globalVar: { type: String, attribute: 'global-var' },  // Optional: Name of global variable to update
-    stateUpdate: { type: Boolean, attribute: 'state-update' }  // Whether to dispatch state update event
+    stateUpdate: { type: Boolean, attribute: 'state-update' },
+    value: { type: String }
   };
 
   constructor() {
     super();
-    this.galleryName = '';  // e.g., 'gallery-potatoes'
-    this.imageFiles = [];
-    this.globalVar = '';
-    this.stateUpdate = false;
+  this.galleryName = '';  // e.g., 'gallery-potatoes'
+  this.imageFiles = [];
+  this.stateUpdate = false;
   }
 
   // Helper function to extract the actual folder name (e.g., 'potatoes')
@@ -124,26 +124,16 @@ class ImageGallery extends LitElement {
           <img 
             src="/${ASSET_BASE_PATH}/${subfolder}/${filename}" 
             alt="${this.galleryName} image: ${filename}"
-            loading="lazy"
             data-image-id="${filename}"
             @click=${() => {
-              // Update global variable if specified
-              if (this.globalVar) {
-                window[this.globalVar] = filename;
-                console.log(`Updated ${this.globalVar} to:`, window[this.globalVar]);
-              }
-              
-              // Dispatch custom event for framework state management
-              this.dispatchEvent(new CustomEvent('image-select', {
-                detail: { 
-                  imageId: filename,
-                  value: filename  // 'value' provided for framework consistency
-                },
+              this.value = filename;
+              this.dispatchEvent(new CustomEvent('change', {
+                detail: { value: filename },
                 bubbles: true,
                 composed: true
               }));
             }}
-            style="cursor: ${this.globalVar ? 'pointer' : 'default'}"
+            style="cursor: pointer"
           />
         `)}
       </div>
@@ -151,4 +141,4 @@ class ImageGallery extends LitElement {
   }
 }
 
-customElements.define('image-gallery', ImageGallery);
+customElements.define('nj-image-gallery', ImageGallery);

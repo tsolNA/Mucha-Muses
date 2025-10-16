@@ -7,17 +7,25 @@
     <title>mucha-muses</title>
     <link rel="stylesheet" href="./src/index.css" />
     <script type="module" src="/src/my-element.js"></script>
-    <script type="module" src="/src/image-gallery.js"></script>
+    <script type="module" src="/src/nj-image-gallery.js"></script>
+    <script type="module" src="/index.js"></script>
     <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/styles/webawesome.css" />
     <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/webawesome.loader.js"></script>
   </head>
   <body>
     <script>
-      // Initialize the global variable
       window.activeImage = null;
+      window.currentGallery = 0;
 
+       
     </script>
 
-    <image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></image-gallery>
+    <div>
+
+      <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery>
+      <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery>
+      <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery>
+    </div>
+
   </body>
 </html>

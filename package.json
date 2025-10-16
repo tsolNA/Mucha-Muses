@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node generate-manifest.js && vite",
     "build": "node generate-manifest.js && vite build",
     "preview": "node generate-manifest.js && vite preview",
     "start": "web-dev-server --node-resolve --open"

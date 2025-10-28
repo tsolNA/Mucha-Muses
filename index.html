@@ -22,10 +22,94 @@
 
     <div>
 
-      <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery>
-      <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery>
-      <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery>
     </div>
+    <wa-tab-group placement="bottom">
+      <wa-tab style="display:none" panel=""></wa-tab>
+      <wa-tab panel="general">THE STAGE</wa-tab>
+      <wa-tab panel="custom">THE STUDIO</wa-tab>
+      <wa-tab panel="advanced">THE SPOTLIGHT</wa-tab>
 
+      <wa-tab-panel name="">
+        <!-- <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery> -->
+        <div class="intro-container">
+          <img src="/public/Eiffel_Tower_Vertical.jpg" alt="">
+          <img src="/public/istockphoto-154232673-612x612.jpg" alt="">
+          <img src="/public/pexels-felix-mittermeier-1459505.jpg" alt="">
+        </div>
+         
+      </wa-tab-panel>
+      <wa-tab-panel name="general">
+        <!-- <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery> -->
+      </wa-tab-panel>
+      <wa-tab-panel name="custom">
+      </wa-tab-panel>
+      <wa-tab-panel name="advanced">
+      </wa-tab-panel>
+    </wa-tab-group>
+    <style>
+      img {
+        width: 33%;
+        height: 850px;
+      }
+      body {
+        height: 100vh
+      }
+      .intro-container {
+        display: flex;
+        gap: 8px;
+        
+      }
+      wa-tab-group {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        &::part(base) {
+          justify-content: space-between;
+          height: 100%;
+          width: 100%;
+        }
+        &::part(body) {
+          height: 100%;
+        }
+      }
+      wa-tab-panel {
+        height: 100%;
+        & .intro-container {
+          padding: 0;
+        }
+        &::part(base) {
+          height: 100%;
+          padding: 0;
+        }
+      }
+      wa-tab {
+      /* This will style the base element of the button */
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        font-size: 45px;
+        padding: 15px;
+        border: solid white 2px;
+        filter: brightness(.5);
+        transition: 1s;
+        color: grey;
+        &[aria-selected="true"] {
+          color: white;
+          background-color: rgba(0, 0, 0, 0.274);
+          filter: brightness(1);
+        }
+        &::part(base) {
+          padding: 20px;
+          
+        }
+        &.tab-active::part(base) {
+          color: red;
+        }
+      }
+      wa-tab.tab-active::part(base) { /* Use the full tag name with & to increase specificity */
+        color: orange; /* Use !important only as a last resort */
+        
+      }
+    </style>
   </body>
 </html>

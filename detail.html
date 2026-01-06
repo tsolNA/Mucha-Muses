@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    <script type="module" src="/src/nj-image-gallery.js"></script>
+    <script type="module" src="/src/nj-navbar.js"></script>
+    <script>
+        let galleryNum = sessionStorage.getItem("gallery")
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log(sessionStorage.getItem('gallery'))
+        });
+        function testing () {
+            sessionStorage.setItem('gallery', 3); 
+            console.log('changed' + sessionStorage.getItem('gallery'))
+
+        }
+    </script>
+    <body>
+        <div class="gallery-container">
+                <button onclick="testing()">3</button>
+
+            <div class="text-container">
+                <p id="primary-gallery">Bernhardt was a global star known by many names: The Divine, Princess of Gesture, and the Queen of Attitude.</p>
+                <p id="secondary-gallery" class="secondary-text">Tap the images to explore Sarah Bernhardt's stage career</p>
+            </div>
+            
+        </div>
+        <nj-navbar></nj-navbar>
+    </body>
+    <style>
+        html {
+            height: 100vh;
+        }
+        body {
+            background-color: #382C3A;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .gallery-container {
+            font-size: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            & .text-container {
+                width: 100%;
+                padding: 30px;
+                color: #EFECCD;
+                line-height: 50px;
+                text-wrap: balance;
+            }
+        }
+        .secondary-text {
+            font-size: 24px;
+        }
+    </style>
+</html>

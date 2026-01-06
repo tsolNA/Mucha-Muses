@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mucha-muses</title>
     <link rel="stylesheet" href="./src/index.css" />
-    <script type="module" src="/src/my-element.js"></script>
     <script type="module" src="/src/nj-image-gallery.js"></script>
-    <script type="module" src="/index.js"></script>
+    <script src="index.js"></script>
     <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/styles/webawesome.css" />
     <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/webawesome.loader.js"></script>
   </head>
@@ -16,100 +15,46 @@
     <script>
       window.activeImage = null;
       window.currentGallery = 0;
-
-       
+      sessionStorage.clear()
     </script>
-
-    <div>
-
+    <div class="intro-container">
+      <a href="/gallery.html" class="intro-link" onclick="navigate('gallery','1')">
+        <img src="stage.png" alt="">
+        <button>Actress</button>
+      </a>
+      <a href="/gallery.html" class="intro-link" onclick="navigate('gallery','2')">
+        <img  src="studio.png" alt="">
+        <button>Artist</button>
+      </a>
+      <a href="/gallery.html" class="intro-link" onclick="navigate('gallery','3')">
+        <img  src="spotlight.png" alt="">
+        <button>Celebrity</button>
+      </a>
     </div>
-    <wa-tab-group placement="bottom">
-      <wa-tab style="display:none" panel=""></wa-tab>
-      <wa-tab panel="general">THE STAGE</wa-tab>
-      <wa-tab panel="custom">THE STUDIO</wa-tab>
-      <wa-tab panel="advanced">THE SPOTLIGHT</wa-tab>
-
-      <wa-tab-panel name="">
-        <!-- <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery> -->
-        <div class="intro-container">
-          <img src="/public/Eiffel_Tower_Vertical.jpg" alt="">
-          <img src="/public/istockphoto-154232673-612x612.jpg" alt="">
-          <img src="/public/pexels-felix-mittermeier-1459505.jpg" alt="">
-        </div>
-         
-      </wa-tab-panel>
-      <wa-tab-panel name="general">
-        <!-- <nj-image-gallery gallery-name="gallery-potatoes" global-var="activeImage"></nj-image-gallery> -->
-      </wa-tab-panel>
-      <wa-tab-panel name="custom">
-      </wa-tab-panel>
-      <wa-tab-panel name="advanced">
-      </wa-tab-panel>
-    </wa-tab-group>
-    <style>
-      img {
-        width: 33%;
-        height: 850px;
-      }
-      body {
-        height: 100vh
-      }
-      .intro-container {
-        display: flex;
-        gap: 8px;
-        
-      }
-      wa-tab-group {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        &::part(base) {
-          justify-content: space-between;
-          height: 100%;
-          width: 100%;
-        }
-        &::part(body) {
-          height: 100%;
-        }
-      }
-      wa-tab-panel {
-        height: 100%;
-        & .intro-container {
-          padding: 0;
-        }
-        &::part(base) {
-          height: 100%;
-          padding: 0;
-        }
-      }
-      wa-tab {
-      /* This will style the base element of the button */
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        font-size: 45px;
-        padding: 15px;
-        border: solid white 2px;
-        filter: brightness(.5);
-        transition: 1s;
-        color: grey;
-        &[aria-selected="true"] {
-          color: white;
-          background-color: rgba(0, 0, 0, 0.274);
-          filter: brightness(1);
-        }
-        &::part(base) {
-          padding: 20px;
-          
-        }
-        &.tab-active::part(base) {
-          color: red;
-        }
-      }
-      wa-tab.tab-active::part(base) { /* Use the full tag name with & to increase specificity */
-        color: orange; /* Use !important only as a last resort */
-        
-      }
-    </style>
   </body>
+
+  <style>
+    .intro-container {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      max-height: 100vh;
+      gap: 20px;
+    }
+    .intro-link {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      & img {
+        max-height: 100vh;
+        border-radius: 0;
+      }
+      & button {
+        height: 106px;
+        border-radius: 0;
+        font-size: 28px;
+        background-color: #382C3A;
+      }
+    }
+  </style>
 </html>

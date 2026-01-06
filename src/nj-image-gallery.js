@@ -6,35 +6,29 @@ const ASSET_BASE_PATH = 'gallery-assets';
 // This must match the prefix you use in the HTML tag (e.g., gallery-potatoes)
 const GALLERY_PREFIX = 'gallery-'; 
 const MANIFEST_FILE_NAME = 'manifest.json';
-// -------------------------------
 
 class ImageGallery extends LitElement {
   static styles = css`
-    /* 1. Essential Host Styling (Prevents Collapse) */
     :host {
-      display: block; /* Custom elements are 'inline' by default; this makes it block-level */
-      width: 100%;    /* Take up the available width */
-      min-height: 250px; /* Ensures visibility while loading/on error */
+      display: block;
+      min-height: 250px; 
       padding: 16px;
       box-sizing: border-box;
       border-radius: 8px;
-      transition: .2s all ease-in-out; /* Smooth transition for any property changes */
+      transition: .2s all ease-in-out;
     }
-
-    /* 2. Gallery Layout */
+    
     .gallery {
       display: grid;
       /* Responsive grid: auto-fit as many 200px wide columns as possible */
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
       gap: 16px;
     }
     
-    /* 3. Image Styling */
     img {
-      width: 100%;       /* Fill the grid cell */
+      width: 100%;
       height: 100%;      
-      aspect-ratio: 1 / 1; /* Maintain a 1:1 aspect ratio */
-      object-fit: cover; /* Crop the image to fill the 1:1 space */
+      object-fit: cover;
       border-radius: 4px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       transition: transform 0.2s;
@@ -44,7 +38,6 @@ class ImageGallery extends LitElement {
       transform: scale(1.02);
     }
     
-    /* 4. Placeholder/Loading Text */
     p {
       text-align: center;
       color: #777;
@@ -61,12 +54,11 @@ class ImageGallery extends LitElement {
 
   constructor() {
     super();
-  this.galleryName = '';  // e.g., 'gallery-potatoes'
-  this.imageFiles = [];
-  this.stateUpdate = false;
+    this.galleryName = '';
+    this.imageFiles = [];
+    this.stateUpdate = false;
   }
 
-  // Helper function to extract the actual folder name (e.g., 'potatoes')
   _getSubfolderName(propValue) {
     if (propValue && propValue.startsWith(GALLERY_PREFIX)) {
       return propValue.substring(GALLERY_PREFIX.length);
@@ -74,7 +66,6 @@ class ImageGallery extends LitElement {
     return propValue;
   }
 
-  // Lifecycle method: Called when a reactive property changes (like galleryName)
   willUpdate(changedProperties) {
     if (changedProperties.has('galleryName') && this.galleryName) {
       this._fetchImageManifest();
@@ -82,7 +73,7 @@ class ImageGallery extends LitElement {
   }
 
   async _fetchImageManifest() {
-    this.imageFiles = []; // Clear previous results
+    this.imageFiles = [];
     const subfolder = this._getSubfolderName(this.galleryName);
     
     // Example URL: /gallery-assets/potatoes/manifest.json

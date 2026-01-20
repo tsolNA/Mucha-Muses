@@ -15,25 +15,25 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-export function galleryNav (page) {
+const base = import.meta.env.BASE_URL;
+function galleryNav (page) {
     sessionStorage.setItem('gallery', page)
 }
 
-export function detailNav (item) {
+function detailNav (item) {
     sessionStorage.setItem('detail', item)
 }
 
-export function navigate(type, num) {
+function navigate(type, num) {
     switch (type) {
         case "gallery": galleryNav(num); break;
         case "detail": detailNav(num); break;
     }
     sessionStorage.setItem(type, num);
-    window.location.href = `/${type}`;
+    window.location.assign(`${base}${type}.html`);
 }
 
-export function parseNum(num) {
+function parseNum(num) {
     switch (num) {
         case '1': return "one"
         case '2': return "two"
@@ -41,19 +41,18 @@ export function parseNum(num) {
         default: return "one"
     }
 }
-export function goHome(e) {
+function goHome(e) {
     e.classList.add("hide");
     document.getElementById("tab-group").active = "";
 }
 
-export function showHomeButton() {
-    document.getElementById("home-button").classList.remove("hide")
-}
-
-export function showGallery(gallery) {
+function showGallery(gallery) {
     document.getElementById("tab-group").active = gallery;
 }
 
-export function showDetails(imageId) {
-    
-}
+window.galleryNav = galleryNav;
+window.detailNav = detailNav;
+window.navigate = navigate;
+window.parseNum = parseNum;
+window.goHome = goHome;
+window.showGallery = showGallery;

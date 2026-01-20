@@ -2,17 +2,82 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mucha-muses</title>
     <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/styles/webawesome.css" />
     <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.6/dist/webawesome.loader.js"></script>
-    <script type="module" crossorigin src="/assets/index-D039eZt3.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BaMtRJpl.css">
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "v2ixqnuxne");
+      
+      document.addEventListener('click', function(event) {
+				let targetId = event.target.id 
+				if (targetId !== '' || targetId !== null) {
+					if (event.target.tagName.toLowerCase() === 'img') {
+						clarity("set", "image", targetId);
+					}
+          if (event.target.tagName.toLowerCase() === 'a') {
+						clarity("set", "link", targetId);
+					}
+					if (event.target.tagName.toLowerCase() === 'button') {
+						clarity("set", "button", targetId);
+					}
+          if (event.target.tagName.toLowerCase() === 'video') {
+						clarity("set", "video", targetId);
+					}
+				}
+			});
+  </script>
+    <script type="module" crossorigin src="/mucha-muses/assets/index-C92rMK27.js"></script>
+    <link rel="stylesheet" crossorigin href="/mucha-muses/assets/main-B0g0FvSd.css">
   </head>
   <body>
-    <my-element>
-      <h1>Vite + Lit</h1>
-    </my-element>
+    <script>
+      window.activeImage = null;
+      window.currentGallery = 0;
+      sessionStorage.clear()
+    </script>
+    <div class="intro-container">
+      <a id="home-actress" class="intro-link" onclick="navigate('gallery','1')">
+        <img src="Home Actress.jpg" alt="">
+      </a>
+      <a id="home-artist" class="intro-link" onclick="navigate('gallery','2')">
+        <img  src="Home Artist.jpg" alt="">
+      </a>
+      <a id="home-celebrity" class="intro-link" onclick="navigate('gallery','3')">
+        <img  src="Home Celebrity.jpg" alt="">
+      </a>
+    </div>
   </body>
+
+  <style>
+    .intro-container {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      max-height: 100vh;
+      gap: 20px;
+    }
+    .intro-link {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      & img {
+        height: 1024px;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+      & button {
+        height: 106px;
+        border-radius: 0;
+        font-size: 34px;
+        background-color: #382C3A;
+        color: #F0EADC;
+        letter-spacing: 9px;
+      }
+    }
+  </style>
 </html>

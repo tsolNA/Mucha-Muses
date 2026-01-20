@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "v2ixqnuxne");
+        
+        document.addEventListener('click', function(event) {
+            let targetId = event.target.id 
+            if (targetId !== '' || targetId !== null) {
+                if (event.target.tagName.toLowerCase() === 'img') {
+                    clarity("set", "image", targetId);
+                }
+                if (event.target.tagName.toLowerCase() === 'a') {
+                    clarity("set", "link", targetId);
+                }
+                if (event.target.tagName.toLowerCase() === 'button') {
+                    clarity("set", "button", targetId);
+                }
+                if (event.target.tagName.toLowerCase() === 'video') {
+                    clarity("set", "video", targetId);
+                }
+            }
+        });
+    </script>
+
+    <script>
+        let galleryNum = sessionStorage.getItem("gallery")
+        let detailNum = sessionStorage.getItem("detail")
+        let loaded = false
+        document.addEventListener('DOMContentLoaded', () => {
+            let selection = document.getElementById("detail-" + galleryNum + "-" + detailNum)
+            selection.classList.add("show")
+            const player = document.querySelector(".audio-player");
+            const audio = player.querySelector(".audio");
+            const playBtn = player.querySelector(".play-btn");
+            const playIcon = player.querySelector(".play-icon");
+            const pauseIcon = player.querySelector(".pause-icon");
+            const seekBar = player.querySelector(".seek-bar");
+            audio.addEventListener("loadedmetadata", () => {
+                seekBar.max = audio.duration;
+            });
+
+            audio.addEventListener("timeupdate", () => {
+                seekBar.value = audio.currentTime;
+                if (seekBar.value == 35.1) {
+                    audio.pause();
+                    playIcon.hidden = false;
+                    pauseIcon.hidden = true;
+                }
+            });
+
+            seekBar.addEventListener("input", () => {
+                audio.currentTime = seekBar.value;
+            });
+            playBtn.addEventListener("click", () => {
+                if (audio.paused) {
+                    if (seekBar.value > 34) {
+                        seekBar.value = 0
+                        audio.currentTime = 0
+                    }
+                    audio.play();
+                    playIcon.hidden = true;
+                    pauseIcon.hidden = false;
+                } else {
+                    audio.pause();
+                    playIcon.hidden = false;
+                    pauseIcon.hidden = true;
+                }
+            });
+        });
+        function resetAudio () {
+            seekBar.value = 0
+        }
+        function testing () {
+            sessionStorage.setItem('gallery', 3); 
+            console.log('changed' + sessionStorage.getItem('gallery'))
+        }
+        function parseSlide() {
+            let getGallery = sessionStorage.getItem('gallery')
+            let getDetail = sessionStorage.getItem('detail')
+            switch (getDetail) {
+                case 1: return
+            }
+        }
+        function changeSlide (element) {
+            const player = document.querySelector(".audio-player");
+            const seekBar = player.querySelector(".seek-bar");
+            const audio = player.querySelector(".audio");
+            const playIcon = player.querySelector(".play-icon");
+            const pauseIcon = player.querySelector(".pause-icon");
+
+            seekBar.value = 0
+            audio.currentTime = 0
+            audio.pause();
+            playIcon.hidden = false;
+            pauseIcon.hidden = true;
+            let previousSlides = document.getElementsByClassName("show")
+            let video = document.getElementById('video')
+            video.currentTime = 0
+            video.pause()
+            document.getElementsByClassName("play-button")[0].classList.add("show-play")
+            for (const el of previousSlides) {
+                el.classList.remove("show")
+            }
+            
+            let selection = document.getElementById("detail-" + element.id)
+            selection.classList.add("show")
+        }
+        function showPlayButton(bool, el) {
+            let playButton = document.getElementsByClassName("play-button")[0]
+            if (bool) {
+                playButton.classList.add("show-play")
+                el.pause()
+            } else {
+                playButton.classList.remove("show-play")
+                el.play()
+            }
+        }
+        
+
+        
+
+        
+    </script>
+    <script type="module" crossorigin src="/mucha-muses/assets/index-C92rMK27.js"></script>
+    <script type="module" crossorigin src="/mucha-muses/assets/nj-navbar-sDQh8Vco.js"></script>
+
+    <body>
+        <div id="detail-1-1" class="image-container">
+            <img src="/mucha-muses/assets/1-1-Cs6oZnYi.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">In 1894, Alphonse Mucha designed a last-minute poster for the play <i>Gismonda</i>, and it became a sensation. Bernhardt, happy with how the artist captured her stature, signed a 6-year contract with Mucha, effectively jumpstarting his career.  </p>
+                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha, <i>Gismonda</i>, 1894, color lithograph, 85 x 29 3/16 in., Mucha Foundation. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="1-4" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">1 of 4</p>
+                    <img id="1-2" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-1-2" class="image-container">
+            <img src="/mucha-muses/assets/1-2-D-bCNZ0-.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text" style="text-wrap: wrap;">Bernhardt was known for her sweet, bell-like voice. </p>
+                    <div class="audio-player">
+                        <button id="play/pause" class="play-btn" aria-label="Play / Pause">
+                            <img
+                                src="data:image/svg+xml,%3csvg%20width='58'%20height='58'%20viewBox='0%200%2058%2058'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url(%23clip0_127_555)'%3e%3ccircle%20cx='29'%20cy='29'%20r='27'%20stroke='%23F0EADC'%20stroke-width='4'/%3e%3cpath%20d='M42.5825%2029L22.2091%2040.7626L22.2091%2017.2374L42.5825%2029Z'%20fill='%23F0EADC'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_127_555'%3e%3crect%20width='58'%20height='58'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e"
+                                alt="Play"
+                                class="icon play-icon"
+                                />
+                            <img
+                                src="data:image/svg+xml,%3csvg%20width='58'%20height='58'%20viewBox='0%200%2058%2058'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3ccircle%20cx='29'%20cy='29'%20r='27'%20stroke='%23F0EADC'%20stroke-width='4'/%3e%3crect%20x='22'%20y='17'%20width='4'%20height='24'%20fill='%23F0EADC'/%3e%3crect%20x='33'%20y='17'%20width='4'%20height='24'%20fill='%23F0EADC'/%3e%3c/svg%3e"
+                                alt="Pause"
+                                class="icon pause-icon"
+                                hidden
+                                />
+                        </button>
+                        <input
+                            type="range"
+                            class="seek-bar"
+                            value="0"
+                            min="0"
+                            step="0.1"
+                        />
+                        <audio class="audio" src="/mucha-muses/assets/Sarah%20Bernhardt%20audio_clip%20(5)-t9RHvFQN.mp3"></audio>
+                    </div>
+                    <p class="primary-text">
+                        Tap the icon to hear Bernhardt perform in <i>La Samaritaine</i> (The Samaritan Woman). <br><br>
+                        <i>This recording features Bernhardt performing a short passage from <i>La Samaritaine</i> in French. Her voice is light and melodic, with a steady rhythm that carries the emotion of the scene. Her expressive delivery gives a sense of why non-French speaking audiences were so drawn to her performances.</i> </p>
+                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha, <i>La Samaritaine</i>, 1897, color lithograph, 67 1/2 x 23 1/2 in., The Nelson-Atkins Museum of Art, gift of Mr. and Mrs. Milton McGreevy, Westport Fund, F62-42. <br><br> Sarah Bernhardt, "La Samaritaine. 1er acte," <i>The Edison Phonograph Monthly</i>, v. 8, released 1910, 3:52. Courtesy of University of California, Santa Barbara Library. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="1-1" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">2 of 4</p>
+                    <img id="1-3" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-1-3" class="image-container">
+            <img src="/mucha-muses/assets/1-3-BQ6q7fPN.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text"><i>La Dame aux Camelias</i> (The Lady of the Camellias) was Bernhardt's most popular show in America. In 1906, during her third stop in Kansas City, a vote was held to determine her one-night-only performance, and this play won out. </p>
+                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha, <i>La Dame aux Camelias</i>, 1896, color lithograph, 82 5/16 x 29 1/2 in., Mucha Foundation. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="1-2" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">3 of 4</p>
+                    <img id="1-4" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-1-4" class="image-container">
+            <video id="video" muted onclick="this.paused ? showPlayButton(false, this) : showPlayButton(true, this);" src="details\video.mp4"></video>
+            <img class="play-button show-play" src="data:image/png;base64,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" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Bernhardt (left) playing the part of Hamlet (1899) <br><br> Though Bernhardt began acting in female roles, she gained fame for playing masculine parts called "trouser roles" that showed her physicality and dramatic power. </p>
+                    <p id="secondary-gallery" class="secondary-text">"Le duel d'Hamlet,"" directed by Cl&#233;ment-Maurice Gratioulet, performances by Sarah Bernhardt, Pierre Magnier, and Suzanne Seylor, Soc. Phono-Cin&#233;ma-Th&#233;&acirc;tre, 1900. <br><br> Credit for Hamlet image: James Lafayette, Irish, 1853-1923, Sarah Bernhardt as Hamlet, about 1885-1900, photochemical print, Library of Congress. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="1-3" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">4 of 4</p>
+                    <img id="1-1" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- ******************************************************************************************************************************************** -->
+        <div id="detail-2-1" class="image-container">
+            <img src="/mucha-muses/assets/2-1-D7l6r7ym.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Bernhardt crafted herself as a sphinx to represent her ability to transform on and off stage. When touring abroad, she sometimes exhibited a cast of this self-portrait outside the performance hall. </p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Fantastic Inkwell (Self-Portrait as a Sphinx)</i>, 1880, bronze, 12 1/2 x 13 3/4 x 12 1/2 in., Museum of Fine Arts, Boston. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-5" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">1 of 5</p>
+                    <img id="2-2" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-2-2" class="image-container">
+            <img src="/mucha-muses/assets/2-2-BLBhMy1r.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Bernhardt was friends with many artists, including painter Louise Abb&#233;ma (1853-1927). Their friendship deepened into a romantic relationship, and they often depicted each other in their work. </p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Bust of Louise Abb&#233;ma</i>, 1878, marble, 16 1/2 x 10 5/8 x 8 11/16 in., Mus&#233;e d'Orsay, Paris. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-1" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">2 of 5</p>
+                    <img id="2-3" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-2-3" class="image-container">
+            <img src="/mucha-muses/assets/2-3-CuSrRJR7.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Although famous for her acting, Bernhardt was passionate about all forms of art. She would often sculpt, paint, design dresses, and even direct plays. </p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Le retour de l'&#233;glise (Return from Church)</i>, 1879, oil on board, 15 x 9 in., Royal Holloway, University of London. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-2" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">3 of 5</p>
+                    <img id="2-4" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-2-4" class="image-container">
+            <img src="/mucha-muses/assets/2-4-ANHoWHXy.png" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Bernhardt sculpted this piece after hearing the tragic story of the model, who had recently lost her son. Allegedly, Bernhardt took anatomy classes to better capture the intensity of the story and to accurately honor the model's grief.</p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Apr&#232;s la temp&#234;te (After the Storm)</i>, 1876, marble, 29 1/2 x 24 x 23 in., National Museum of Women in the Arts. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-3" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">4 of 5</p>
+                    <img id="2-5" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-2-5" class="image-container">
+            <img src="/mucha-muses/assets/2-5-BuqoesoG.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">In the late 1800s, there was an interest in morbid, decadent, and gothic sensibilities. Bernhardt was a fan of the macabre. Some speculate her interest stemmed from her fragile health as a child or from a desire to ward off the fear of dying.</p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>A Girl and Death</i>, 1879, lithograph, 6 1/8 x 5 3/16 in., Wellcome Collection, London.</p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-4" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">5 of 5</p>
+                    <img id="2-1" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- ***************************************************************************************************************************************** -->
+        <div id="detail-3-1" class="image-container">
+            <img src="/mucha-muses/assets/3-1-Bgt7WJTB.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">"Sarah Bernhardt's Ghastly Bargain"
+                        <br><i>Kansas City Star</i>
+                        <br>April 21, 1882 <br> <br>
+                        Allegedly, Bernhardt told the photographer to sell these pictures only after her death, promising to "die within a year from now." She went on to live for another 41 years. </p>
+                    <p id="secondary-gallery" class="secondary-text">Photo credited to Achille M&#233;landri, "Sarah Bernhardt's Ghastly Bargain," <i>Kansas City Star</i>, no. 89, April 21, 1882, p. 3. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-5" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">1 of 5</p>
+                    <img id="3-2" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-3-2" class="image-container" >
+            <img src="/mucha-muses/assets/3-2-DWa8oS_A.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">"Now, Then, Camille."
+                        <br><i>Kansas City Times</i> 
+                        <br>May 11, 1887<br><br>
+                        American fans often referred to Bernhardt as "Camille," derived from the title of her famous play <i>La Dame aux Camelias</i> (The Lady of the Camellias). During Bernhardt's first show in Kansas City, the Gillis Opera House's curtain mistakenly hit a table due to a stagehand's error. Allegedly, Bernhardt chased the stagehand and would not perform until he left.</p>
+                    <p id="secondary-gallery" class="secondary-text">"Now, Then, Camille.," <i>Kansas City Times</i>, May 11, 1887, p. 10. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-1" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">2 of 5</p>
+                    <img id="3-3" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-3-3" class="image-container">
+            <img src="/mucha-muses/assets/3-3-BqwE1AvZ.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">"Divine Sarah is Here" <br>
+                        <i>Kansas City Times</i><br>
+                        February 4, 1901 <br> <br>
+                        A <i>Kansas City Times</i> article recounts Bernhardt's fury when she believed her private railcar had been sidetracked beside pigs in the stockyards. Caption on caricature: "Oh, zey haf put us down where zey kill ze peegs." </p>
+                    <p id="secondary-gallery" class="secondary-text"><i>Kansas City Times</i>, February 4, 1901, pg. 1. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-2" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">3 of 5</p>
+                    <img id="3-4" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-3-4" class="image-container">
+            <img src="/mucha-muses/assets/3-4-DwSY880Z.png" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">In 1906, during Bernhardt's third stop in Kansas City, she performed <i>La Dame aux Camelias</i> (The Lady of the Camellias) at Convention Hall. It broke all records as the largest known indoor audience for dramatic theater anywhere in the world.  </p>
+                    <p id="secondary-gallery" class="secondary-text">Reproduced in Felicia Hardison Londr&#233;, <i>The Enchanted Years of the Stage: Kansas City at the Crossroads of American Theater, 1870-1930</i>, University of Missouri, 2007.  </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-3" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">4 of 5</p>
+                    <img id="3-5" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-3-5" class="image-container">
+            <img src="/mucha-muses/assets/3-5-ChEoAmWE.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">"The Funeral of Sarah Bernhardt in Paris" <br>
+                        <i>Kansas City Star</i> <br>
+                        April 10, 1923 <br> <br>
+                        Bernhardt's funeral was massive, drawing crowds of thousands. It included a half-mile procession of carriages filled with flowers. </p>
+                    <p id="secondary-gallery" class="secondary-text"><i>Kansas City Star</i>, April 10, 1923, p. 4.</p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-4" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">5 of 5</p>
+                    <img id="3-1" class="right-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVISURBVHgBxVpNdttGDAaGUjZdVFzEaXfSq5Ot1ROEPkGcE9g+gd0T1D6B5RNYOUGSE5Q+QZRtLT2qq8Zy+si0eW1akTMFQFKi2Nrin+zvPT1RFDnzARgMMJhBaAC+73VgPt9TYO0YY7qA0AfEDhjTyTw25Q8CjrQxl/DIGtl2bwo1gVARTFqF+ogIO/TTgUrAkQFzDm3LrSpMaQGIeFfNiTjCwULDiAGAcQ3gJaCZwtwawRcI7F4vkHc8stBXQJYJ6XnVRzDP6SUnayEiMtRt67SsIIUFWGgc4DjTsWvQnMLn1iglWwb+bHxABPZhacEAEQdfP/7utGgbhQRgreNc/0Ra7iZvvTGh9YP9bf0xLO3/6nVBzU8Q1X5Ca2raareINdYK8PtHb18bPYi1Tg2jPrQfP3VhA/A/jvdQ41miqMAYOLSfbL+Bqvh0M/kxmI0Nf/wP44GM5Q2Dh6p//fMw7Zc5QBWskL++OoF7Bve5VN7VcamXP/3mHT0k+RQrQlyP94q9RA4b3Ez8hya/4LMUwmdua18IZhMvHfNQARKVG8bSJybv8v+p7I/YYXgGwCn8ZZ1A2Y7i6fZdZce7DY/ax8IJTD/vD7jaeeTxtQH9vb31bAQlkI8VFJBOygSkte3fXDlokNqn6bVt9ShGSOBcWEDNI9Eah/Sy5OW9UL9eBDoC5UgnTVoiiT386cA/4cIKIgBrj1KEA77WkVVJa8aoQxIjWL3XrBCStoBY9yj1tdgC88iRB7R5WzU9sLd6lFmq3U0KsWKFv8MDvicCsETyRAuHUAP3IQT55yv+RoUv5DvjvEFna9uGBuDPPEqZxaFXptQmHJuHDk0WHrdNzmyrzPC5hIZwlyVKpwX5tmX2MfEkE0UOD6F+8p8LDUKEQP0yf59Mf8YZLtQATTjv5SIER9G0uSM/LCg9da4DOx11dpi/r3U0rCWESpVtumyBbnxtSq+oisDe2h42LoS2pvxF1txZCFAleBVF40JEsFC2gntCk0JkYlX33gSQjkkITlXy91kIWRdXgEqnuk2kwXmwptOUJQu2TJkMICPslARInPcLbFQAjsSs6fx9IU+WgTKwUq4YKEo/Y+dtR33YEJg8B7H8/UrkGSrqJi0EikoXv8h1uEyFm0Tj5BmREWUbDe9pCGmxQJocNYmNkAfJqZ7LRQtcjJOjyIfcSqcuNkU+wxckmUsIu8A5dhg24gf/S54KwLQg2a1DXjCP0vIKV7QDiQMG8a30YbB2zn4reUO1zgZKkkkxmC0p64I4kLXUMIkHDi+eoSLuJE/ZKdREUhdypELRtqRmKgKwKYzR59JfRStsmrw0F0Zn/E1cX/2nKgGPWoM6VqAg1VvtrVnyvJdA42ZPtK9bw/T+QoBVK6iLsqmF/eTZAWsGNkGel70Qjwyj9fmdaQeX76SsPRtfQJXOZlSGpzUxNIjgZvw6KS16ax/mRIke9GvV5hvEssw/8QpnrLxTUnuDoQGs7FGU9Uv/w+T4IYVYIc8OXAXZDQb2iftYM3AfyzG/nvzaTb5k4+0iLlLRJh+Y09rpwG19SQVaXUiRmGcy0C/XRe9i26zkPGhlSucVN6VvbT8unfMwdZJbromsQqu0Ujv1PKTivdzF2sGVnITCetksNj1fgaCWG92s9Uif2t88HRRtp/xRg3RTWlkvcoc5XMOHOABHgHoKUTtINSjvWHN+ti8HQminhcj2s0cVOEDBn61B2R3/6oc9hFTk5I4KlIUrmfBnNaxyVIFRWYAsRBheU1OtEhWXKrGTVKa7ySPTpLeRiWgJSysp+MNyq5LO4l89stVZ7DDyMQAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <nj-navbar></nj-navbar>
+    </body>
+    <style>
+        body {
+            font-family: Avenir, sans-serif, Helvetica, Arial;
+        }
+        html {
+            height: 100vh;
+        }
+        video {
+            height: 620px;
+            width: 830px;
+        }
+        .play-button {
+            display: none;
+            pointer-events: none;
+            position: absolute;
+            top: 38%;
+            left: 29%;
+            width: 150px !important;
+            height: 150px !important;
+        }
+        .show-play {
+            display: flex !important;
+        }
+        body {
+            background-color: #382C3A;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .slide-controls {
+            position: absolute;
+            right: 25px;
+            bottom: 110px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 25px;
+            & img {
+                height: 50px !important;
+                width: 50px !important;
+            }
+            .left-chevron {
+            }
+        }
+        .show {
+            display: flex !important;
+        }
+        .image-container {
+            font-size: 24px;
+            flex: 1;
+            display: none;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            
+            & img {
+                width: auto;
+                height: 100%;
+                max-height: 80vh;
+                max-width: 50%;
+            }
+            & .text-actual {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            & .text-container {
+                min-width: 400px;
+                max-width: 550px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                flex: .6;
+                width: 100%;
+                color: #EFECCD;
+                line-height: 50px;
+                text-wrap: balance;
+            }
+        }
+        .video-container {
+
+        }
+        .audio-container {
+
+        }
+        .primary-text {
+            text-wrap: balance;
+            line-height: 40px;
+        }
+        .secondary-text {
+            text-wrap: balance;
+            line-height: 20px;
+            font-size: 16px;
+        }
+        .audio-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 90%;
+        }
+
+        .play-btn {
+            width: 100px;
+            height: 100px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            margin-top: -30px;
+            margin-bottom: -30px;
+        }
+
+        .play-btn img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .pause-icon[hidden] {
+        display: none;
+        }
+
+        .seek-bar {
+            flex: 1;
+            cursor: pointer;
+            accent-color: white;
+            height: 5px;
+            background-color: white;
+        }
+    </style>
+</html>

@@ -1,8 +1,4 @@
 import { LitElement, css, html } from 'lit'
-import litLogo from './assets/lit.svg'
-import viteLogo from '/vite.svg'
-import { navigate } from '../index.js'
-
 /**
  * An example element.
  *
@@ -45,10 +41,18 @@ export class Navbar extends LitElement {
   render() {
     return html`
       <div class="container">
-        <a href="/">Home</a>
-        <a id="1" @click=${() => navigate('gallery','1')}>Actress</a>
-        <a id="2" @click=${() => navigate('gallery','2')}>Artist</a>
-        <a id="3" @click=${() => navigate('gallery','3')}>Celebrity</a>
+        <a href="index.html">
+          Home
+        </a>
+        <a id="1" onclick="navigate('gallery','1')">
+          Actress
+        </a>
+        <a id="2" onclick="navigate('gallery','2')">
+          Artist
+        </a>
+        <a id="3" onclick="navigate('gallery','3')">
+          Celebrity
+        </a>
       </div>
     `
   }

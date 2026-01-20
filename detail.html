@@ -2,32 +2,396 @@
 <html lang="en">
     <script type="module" src="/src/nj-image-gallery.js"></script>
     <script type="module" src="/src/nj-navbar.js"></script>
+    <script type="module" src="/index.js">
+        import videoURL from '/video.mp4'
+    </script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "v2ixqnuxne");
+        
+        document.addEventListener('click', function(event) {
+            let targetId = event.target.id 
+            if (targetId !== '' || targetId !== null) {
+                if (event.target.tagName.toLowerCase() === 'img') {
+                    clarity("set", "image", targetId);
+                }
+                if (event.target.tagName.toLowerCase() === 'a') {
+                    clarity("set", "link", targetId);
+                }
+                if (event.target.tagName.toLowerCase() === 'button') {
+                    clarity("set", "button", targetId);
+                }
+                if (event.target.tagName.toLowerCase() === 'video') {
+                    clarity("set", "video", targetId);
+                }
+            }
+        });
+    </script>
+
     <script>
         let galleryNum = sessionStorage.getItem("gallery")
+        let detailNum = sessionStorage.getItem("detail")
+        let loaded = false
         document.addEventListener('DOMContentLoaded', () => {
-            console.log(sessionStorage.getItem('gallery'))
+            let selection = document.getElementById("detail-" + galleryNum + "-" + detailNum)
+            selection.classList.add("show")
+            const player = document.querySelector(".audio-player");
+            const audio = player.querySelector(".audio");
+            const playBtn = player.querySelector(".play-btn");
+            const playIcon = player.querySelector(".play-icon");
+            const pauseIcon = player.querySelector(".pause-icon");
+            const seekBar = player.querySelector(".seek-bar");
+            audio.addEventListener("loadedmetadata", () => {
+                seekBar.max = audio.duration;
+            });
+
+            audio.addEventListener("timeupdate", () => {
+                seekBar.value = audio.currentTime;
+                if (seekBar.value == 35.1) {
+                    audio.pause();
+                    playIcon.hidden = false;
+                    pauseIcon.hidden = true;
+                }
+            });
+
+            seekBar.addEventListener("input", () => {
+                audio.currentTime = seekBar.value;
+            });
+            playBtn.addEventListener("click", () => {
+                if (audio.paused) {
+                    if (seekBar.value > 34) {
+                        seekBar.value = 0
+                        audio.currentTime = 0
+                    }
+                    audio.play();
+                    playIcon.hidden = true;
+                    pauseIcon.hidden = false;
+                } else {
+                    audio.pause();
+                    playIcon.hidden = false;
+                    pauseIcon.hidden = true;
+                }
+            });
         });
+        function resetAudio () {
+            seekBar.value = 0
+        }
         function testing () {
             sessionStorage.setItem('gallery', 3); 
             console.log('changed' + sessionStorage.getItem('gallery'))
-
         }
+        function parseSlide() {
+            let getGallery = sessionStorage.getItem('gallery')
+            let getDetail = sessionStorage.getItem('detail')
+            switch (getDetail) {
+                case 1: return
+            }
+        }
+        function changeSlide (element) {
+            const player = document.querySelector(".audio-player");
+            const seekBar = player.querySelector(".seek-bar");
+            const audio = player.querySelector(".audio");
+            const playIcon = player.querySelector(".play-icon");
+            const pauseIcon = player.querySelector(".pause-icon");
+
+            seekBar.value = 0
+            audio.currentTime = 0
+            audio.pause();
+            playIcon.hidden = false;
+            pauseIcon.hidden = true;
+            let previousSlides = document.getElementsByClassName("show")
+            let video = document.getElementById('video')
+            video.currentTime = 0
+            video.pause()
+            document.getElementsByClassName("play-button")[0].classList.add("show-play")
+            for (const el of previousSlides) {
+                el.classList.remove("show")
+            }
+            
+            let selection = document.getElementById("detail-" + element.id)
+            selection.classList.add("show")
+        }
+        function showPlayButton(bool, el) {
+            let playButton = document.getElementsByClassName("play-button")[0]
+            if (bool) {
+                playButton.classList.add("show-play")
+                el.pause()
+            } else {
+                playButton.classList.remove("show-play")
+                el.play()
+            }
+        }
+        
+
+        
+
+        
     </script>
     <body>
-        <div class="gallery-container">
-                <button onclick="testing()">3</button>
-
+        <div id="detail-1-1" class="image-container">
+            <img src="public\details\1-1.jpg" alt="">
             <div class="text-container">
-                <p id="primary-gallery">Bernhardt was a global star known by many names: The Divine, Princess of Gesture, and the Queen of Attitude.</p>
-                <p id="secondary-gallery" class="secondary-text">Tap the images to explore Sarah Bernhardt's stage career</p>
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">In 1894, Alphonse Mucha designed a last-minute poster for the play <i>Gismonda</i>, and it became a sensation. Bernhardt, happy with how the artist captured her stature, signed a 6-year contract with Mucha, effectively jumpstarting his career.  </p>
+                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha, <i>Gismonda</i>, 1894, color lithograph, 85 x 29 3/16 in., Mucha Foundation. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="1-4" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">1 of 4</p>
+                    <img id="1-2" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
             </div>
-            
+        </div>
+        <div id="detail-1-2" class="image-container">
+            <img src="public\details\1-2.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text" style="text-wrap: wrap;">Bernhardt was known for her sweet, bell-like voice. </p>
+                    <div class="audio-player">
+                        <button id="play/pause" class="play-btn" aria-label="Play / Pause">
+                            <img
+                                src="public\Audio player\Audio play button.svg"
+                                alt="Play"
+                                class="icon play-icon"
+                                />
+                            <img
+                                src="public\Audio player\Audio pause button.svg"
+                                alt="Pause"
+                                class="icon pause-icon"
+                                hidden
+                                />
+                        </button>
+                        <input
+                            type="range"
+                            class="seek-bar"
+                            value="0"
+                            min="0"
+                            step="0.1"
+                        />
+                        <audio class="audio" src="public\details\Sarah Bernhardt audio_clip (5).mp3"></audio>
+                    </div>
+                    <p class="primary-text">
+                        Tap the icon to hear Bernhardt perform in <i>La Samaritaine</i> (The Samaritan Woman). <br><br>
+                        <i>This recording features Bernhardt performing a short passage from <i>La Samaritaine</i> in French. Her voice is light and melodic, with a steady rhythm that carries the emotion of the scene. Her expressive delivery gives a sense of why non-French speaking audiences were so drawn to her performances.</i> </p>
+                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha, <i>La Samaritaine</i>, 1897, color lithograph, 67 1/2 x 23 1/2 in., The Nelson-Atkins Museum of Art, gift of Mr. and Mrs. Milton McGreevy, Westport Fund, F62-42. <br><br> Sarah Bernhardt, "La Samaritaine. 1er acte," <i>The Edison Phonograph Monthly</i>, v. 8, released 1910, 3:52. Courtesy of University of California, Santa Barbara Library. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="1-1" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">2 of 4</p>
+                    <img id="1-3" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-1-3" class="image-container">
+            <img src="public\details\1-3.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text"><i>La Dame aux Camelias</i> (The Lady of the Camellias) was Bernhardt's most popular show in America. In 1906, during her third stop in Kansas City, a vote was held to determine her one-night-only performance, and this play won out. </p>
+                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha, <i>La Dame aux Camelias</i>, 1896, color lithograph, 82 5/16 x 29 1/2 in., Mucha Foundation. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="1-2" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">3 of 4</p>
+                    <img id="1-4" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-1-4" class="image-container">
+            <video id="video" muted onclick="this.paused ? showPlayButton(false, this) : showPlayButton(true, this);" src="details\video.mp4"></video>
+            <img class="play-button show-play" src="public\Video play button\Video play button.png" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Bernhardt (left) playing the part of Hamlet (1899) <br><br> Though Bernhardt began acting in female roles, she gained fame for playing masculine parts called "trouser roles" that showed her physicality and dramatic power. </p>
+                    <p id="secondary-gallery" class="secondary-text">"Le duel d'Hamlet,"" directed by Cl&#233;ment-Maurice Gratioulet, performances by Sarah Bernhardt, Pierre Magnier, and Suzanne Seylor, Soc. Phono-Cin&#233;ma-Th&#233;&acirc;tre, 1900. <br><br> Credit for Hamlet image: James Lafayette, Irish, 1853-1923, Sarah Bernhardt as Hamlet, about 1885-1900, photochemical print, Library of Congress. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="1-3" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">4 of 4</p>
+                    <img id="1-1" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- ******************************************************************************************************************************************** -->
+        <div id="detail-2-1" class="image-container">
+            <img src="public\details\2-1.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Bernhardt crafted herself as a sphinx to represent her ability to transform on and off stage. When touring abroad, she sometimes exhibited a cast of this self-portrait outside the performance hall. </p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Fantastic Inkwell (Self-Portrait as a Sphinx)</i>, 1880, bronze, 12 1/2 x 13 3/4 x 12 1/2 in., Museum of Fine Arts, Boston. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-5" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">1 of 5</p>
+                    <img id="2-2" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-2-2" class="image-container">
+            <img src="public\details\2-2.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Bernhardt was friends with many artists, including painter Louise Abb&#233;ma (1853-1927). Their friendship deepened into a romantic relationship, and they often depicted each other in their work. </p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Bust of Louise Abb&#233;ma</i>, 1878, marble, 16 1/2 x 10 5/8 x 8 11/16 in., Mus&#233;e d'Orsay, Paris. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-1" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">2 of 5</p>
+                    <img id="2-3" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-2-3" class="image-container">
+            <img src="public\details\2-3.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Although famous for her acting, Bernhardt was passionate about all forms of art. She would often sculpt, paint, design dresses, and even direct plays. </p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Le retour de l'&#233;glise (Return from Church)</i>, 1879, oil on board, 15 x 9 in., Royal Holloway, University of London. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-2" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">3 of 5</p>
+                    <img id="2-4" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-2-4" class="image-container">
+            <img src="public\details\2-4.png" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">Bernhardt sculpted this piece after hearing the tragic story of the model, who had recently lost her son. Allegedly, Bernhardt took anatomy classes to better capture the intensity of the story and to accurately honor the model's grief.</p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Apr&#232;s la temp&#234;te (After the Storm)</i>, 1876, marble, 29 1/2 x 24 x 23 in., National Museum of Women in the Arts. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-3" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">4 of 5</p>
+                    <img id="2-5" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-2-5" class="image-container">
+            <img src="public\details\2-5.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">In the late 1800s, there was an interest in morbid, decadent, and gothic sensibilities. Bernhardt was a fan of the macabre. Some speculate her interest stemmed from her fragile health as a child or from a desire to ward off the fear of dying.</p>
+                    <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>A Girl and Death</i>, 1879, lithograph, 6 1/8 x 5 3/16 in., Wellcome Collection, London.</p>
+                </div>
+                <div class="slide-controls">
+                    <img id="2-4" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">5 of 5</p>
+                    <img id="2-1" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- ***************************************************************************************************************************************** -->
+        <div id="detail-3-1" class="image-container">
+            <img src="public\details\3-1.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">"Sarah Bernhardt's Ghastly Bargain"
+                        <br><i>Kansas City Star</i>
+                        <br>April 21, 1882 <br> <br>
+                        Allegedly, Bernhardt told the photographer to sell these pictures only after her death, promising to "die within a year from now." She went on to live for another 41 years. </p>
+                    <p id="secondary-gallery" class="secondary-text">Photo credited to Achille M&#233;landri, "Sarah Bernhardt's Ghastly Bargain," <i>Kansas City Star</i>, no. 89, April 21, 1882, p. 3. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-5" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">1 of 5</p>
+                    <img id="3-2" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-3-2" class="image-container" >
+            <img src="public\details\3-2.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">"Now, Then, Camille."
+                        <br><i>Kansas City Times</i> 
+                        <br>May 11, 1887<br><br>
+                        American fans often referred to Bernhardt as "Camille," derived from the title of her famous play <i>La Dame aux Camelias</i> (The Lady of the Camellias). During Bernhardt's first show in Kansas City, the Gillis Opera House's curtain mistakenly hit a table due to a stagehand's error. Allegedly, Bernhardt chased the stagehand and would not perform until he left.</p>
+                    <p id="secondary-gallery" class="secondary-text">"Now, Then, Camille.," <i>Kansas City Times</i>, May 11, 1887, p. 10. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-1" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">2 of 5</p>
+                    <img id="3-3" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-3-3" class="image-container">
+            <img src="public\details\3-3.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">"Divine Sarah is Here" <br>
+                        <i>Kansas City Times</i><br>
+                        February 4, 1901 <br> <br>
+                        A <i>Kansas City Times</i> article recounts Bernhardt's fury when she believed her private railcar had been sidetracked beside pigs in the stockyards. Caption on caricature: "Oh, zey haf put us down where zey kill ze peegs." </p>
+                    <p id="secondary-gallery" class="secondary-text"><i>Kansas City Times</i>, February 4, 1901, pg. 1. </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-2" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">3 of 5</p>
+                    <img id="3-4" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-3-4" class="image-container">
+            <img src="public\details\3-4.png" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">In 1906, during Bernhardt's third stop in Kansas City, she performed <i>La Dame aux Camelias</i> (The Lady of the Camellias) at Convention Hall. It broke all records as the largest known indoor audience for dramatic theater anywhere in the world.  </p>
+                    <p id="secondary-gallery" class="secondary-text">Reproduced in Felicia Hardison Londr&#233;, <i>The Enchanted Years of the Stage: Kansas City at the Crossroads of American Theater, 1870-1930</i>, University of Missouri, 2007.  </p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-3" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">4 of 5</p>
+                    <img id="3-5" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="detail-3-5" class="image-container">
+            <img src="public\details\3-5.jpg" alt="">
+            <div class="text-container">
+                <div class="text-actual">
+                    <p id="primary-gallery" class="primary-text">"The Funeral of Sarah Bernhardt in Paris" <br>
+                        <i>Kansas City Star</i> <br>
+                        April 10, 1923 <br> <br>
+                        Bernhardt's funeral was massive, drawing crowds of thousands. It included a half-mile procession of carriages filled with flowers. </p>
+                    <p id="secondary-gallery" class="secondary-text"><i>Kansas City Star</i>, April 10, 1923, p. 4.</p>
+                </div>
+                <div class="slide-controls">
+                    <img id="3-4" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
+                    <p class="slide-count">5 of 5</p>
+                    <img id="3-1" class="right-button" src="public\Navigation buttons\Right arrow button.png" onclick="changeSlide(this)" alt="">
+                </div>
+            </div>
         </div>
         <nj-navbar></nj-navbar>
     </body>
     <style>
+        body {
+            font-family: Avenir, sans-serif, Helvetica, Arial;
+        }
         html {
             height: 100vh;
+        }
+        video {
+            height: 620px;
+            width: 830px;
+        }
+        .play-button {
+            display: none;
+            pointer-events: none;
+            position: absolute;
+            top: 38%;
+            left: 29%;
+            width: 150px !important;
+            height: 150px !important;
+        }
+        .show-play {
+            display: flex !important;
         }
         body {
             background-color: #382C3A;
@@ -37,21 +401,106 @@
             flex-direction: column;
             height: 100%;
         }
-        .gallery-container {
-            font-size: 30px;
-            flex: 1;
+        .slide-controls {
+            position: absolute;
+            right: 25px;
+            bottom: 110px;
             display: flex;
             flex-direction: row;
+            align-items: center;
+            gap: 25px;
+            & img {
+                height: 50px !important;
+                width: 50px !important;
+            }
+            .left-chevron {
+            }
+        }
+        .show {
+            display: flex !important;
+        }
+        .image-container {
+            font-size: 24px;
+            flex: 1;
+            display: none;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            
+            & img {
+                width: auto;
+                height: 100%;
+                max-height: 80vh;
+                max-width: 50%;
+            }
+            & .text-actual {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
             & .text-container {
+                min-width: 400px;
+                max-width: 550px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                flex: .6;
                 width: 100%;
-                padding: 30px;
                 color: #EFECCD;
                 line-height: 50px;
                 text-wrap: balance;
             }
         }
+        .video-container {
+
+        }
+        .audio-container {
+
+        }
+        .primary-text {
+            text-wrap: balance;
+            line-height: 40px;
+        }
         .secondary-text {
-            font-size: 24px;
+            text-wrap: balance;
+            line-height: 20px;
+            font-size: 16px;
+        }
+        .audio-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 90%;
+        }
+
+        .play-btn {
+            width: 100px;
+            height: 100px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            margin-top: -30px;
+            margin-bottom: -30px;
+        }
+
+        .play-btn img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .pause-icon[hidden] {
+        display: none;
+        }
+
+        .seek-bar {
+            flex: 1;
+            cursor: pointer;
+            accent-color: white;
+            height: 5px;
+            background-color: white;
         }
     </style>
 </html>

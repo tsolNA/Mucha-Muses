@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, sans-serif, Helvetica, Arial, ;
   line-height: 1.5;
   font-weight: 400;
 
@@ -14,7 +14,8 @@
 }
 
 body {
-  background-color: #EFECCD;
+  font-family: Avenir, sans-serif, Helvetica, Arial;
+  background-color: #534055;
   margin: 0;
   display: flex;
   place-items: center;

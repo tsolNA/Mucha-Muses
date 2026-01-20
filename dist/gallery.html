@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "v2ixqnuxne");
+      
+        document.addEventListener('click', function(event) {
+            let targetId = event.target.id 
+            if (targetId !== '' || targetId !== null) {
+                if (event.target.tagName.toLowerCase() === 'img') {
+                    clarity("set", "image", targetId);
+                }
+                if (event.target.tagName.toLowerCase() === 'a') {
+                            clarity("set", "link", targetId);
+                        }
+                        if (event.target.tagName.toLowerCase() === 'button') {
+                            clarity("set", "button", targetId);
+                        }
+                if (event.target.tagName.toLowerCase() === 'video') {
+                    clarity("set", "video", targetId);
+                }
+            }
+        });
+    </script>
+    <script>
+        let galleryNum = sessionStorage.getItem("gallery")
+        document.addEventListener('DOMContentLoaded', () => {
+            let numberActual = "." + parseNum(galleryNum)
+            let galleries = document.querySelectorAll(numberActual)
+            console.log(galleries)
+            galleries.forEach(element => {
+                element.classList.add("show")
+            });
+        });
+        
+    </script>
+    <script type="module" crossorigin src="/mucha-muses/assets/index-C92rMK27.js"></script>
+    <script type="module" crossorigin src="/mucha-muses/assets/nj-navbar-sDQh8Vco.js"></script>
+
+    <body>
+        <div class="gallery-container">
+            <div class="text-container one">
+                <img src="data:image/png;base64,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" alt="">
+                <p id="primary-gallery">Bernhardt was a global star known by many names: "The Divine," "Princess of Gesture," and the "Queen of Attitude."</p>
+                <p id="secondary-gallery" class="secondary-text">Tap the images to explore Sarah Bernhardt's stage career</p>
+            </div>
+            <div class="text-container two">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF0AAABQCAYAAAB773kdAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAA+BSURBVHgB7V3dbhNJFj5VbSM0sFpzuZoAzhNM8gQ4T0AiLTCze4FzuVpBkicgPIETVnsdc7FigZFiniDmCRKeIGYImsv1aIfZEXZX7fnqp9PudLftjhM7gU+CjvvfX1WdOr9lQZcQR/9qLJCkBS3kghTiNpFewH4tRDU6SeiuUNTlfR2t9DtBqqM1Hdz8YaNNZwxBlwCHO41K+SotCxnc1VLXmN3KwAmCuqTpF03Uie2tCEG3eX/iXM3nipbqh29u/WWjRWeAC036hxeNmgyCNS1iRDPBTO5b/mJtxb04DEoH8yt/6+Td5+jVP3kkhAtMeE1ocYevr9ojmq8T7V4YPp3/YaNDE8KFJB1kiyB4wn/WzA4QrfVzErJ1896jNp0SphFEf32wAag5KfIvFOk/v2hUwyDYIUc2ejQJsTkJorNw9OpZnUl6YsnXHRWqp7d+2GjSKXBhSD963Vgnkk+cGOnwBLh6lmSfeH6cfEHtXj9cLdrrZ550TJJXromGJlnHZxYjT/u/qa351Y0unTPMSCvJTW74h+j1OlSrRbSdmSYdX1IFck+TqJLRPMKVufsbBzRloNczcw1oPkLozW/vrT0d5/qZJX2AcJ4ke7+p9Wn07izY9wv2IG7GJX4mSY8TDnFy88HaJs0gihI/c6RbGS73Z51wj8NdNsz6co/l/MKoxEuaMZS/kVsXhXBgfmWjG/TVioBGpcXm0Y/bD4ddM1M93aiFOmiwL2T75vdr6zQBYOTQ1WNTf5KWZRwxUVOhXrg099fsCX9mSHfq2D4P0+7c/cfzVAAguHSV2JqU7IcR37FZv3DCDwMYZ5doax2+7WlqTaohjl6xo42CfaiTvU9qMWvinxnSj15uN9m6fMim9vy4JMAtYIgO6OGAD0bTezaiDoRWcHhZAqTghuCJj+i72C3aKgyfn9bSNN/j9TMerUad3Jp78Hgj7ZyZIN35UvZ4hmnO/fnx6qjXuSHNhhMtu13veS5okpTtYdaq8UxeC5b5Wliad+xe7qGhWjptz//447NdrWhZh+FSmvE0E6SzsbHHm9o4vdw0VEnuomef1gczaGkyKQUMnjisRhMc8p8Hc/ceLyWPT51058Q6HKeXGw1Biabxk4f0dO77x1s0AcT9K7xtff7E/pWCBpkXMyy2VpNia+oqYyi5hzF6vXCknmUmKxAOt4BmLWFChAM8gTcliwQhqQWRVb4m94z2U+Re9/i92DEmA/kkeWzqPf3jq+1DReL9zfuPa8POjSxVISrs5VvMEkUmuFGSd1hv5qCErkZhOhsVOjDhuVA189S6Dy+3N4UQT0BcmogYBX6uSvb2qfZ0vBQMIY5VjhQWw6jA+UrTRhrhuB/mB3xRGCq8q3ZMOEJ2RrOpsTq5RuVgH+eaeGoKYJjBQGMRUfv4evsJFYCZRNHbS8GAwTRd8RJIq3WEYXvYqUcvGnWolJD9t1gMxI9BBHx8tbVjNCAQbSZWYnUtWOx9Cm+w2BDcW80W+/icVS3oDc415L981kgTI8YiZtLQgEYtLQAOGW6j4eLXl2iKECSgK3fzhnl0LstGJvOE7Leqn3GOLcCS7f9PbeZNfnP3/45n4V8z0lpIrPM9lg9fNE6oiwEHK8JSsC9KJjzYpjERBv221EEXdoS/ftoTKXrlu2EneTGEXp4kBb4aJm1Bce+F62AcbeNPfK+5e2t1I0b4/mWeL5j4avIc3jxN9tZRAd8M4rcs0iIRMzXSrclsZvLDoSc7MZTs5V7kgLSkyBkH1rEWrjrid5PHnSbSdb19fIQKc1bFN9rUSNehdUIxYe+HnWvFkDhI9nJh1bHOJLyRHJFqatLbGDXQXJLHIbqK9vb+VbLi04qY6ZHOk151jNNrWqm38R0YKUaTwdCfEG7eX1uHi5ZVxbXkxNq/oqw94IgbBxAxmJCFlMbdMHXjCGltecd/djJWC9keOCCCGjbhCJrPOIBOzZtK6Rs54Fo+Jk4M9ZengUf0O6T3oTGnTjqMl5HOkzQwQWp7XXfS/nGnW3fR25PHWMRgtFWSk+0oYBFpRAxczzMXORoVgiPxo2g+RWCyxWITXwSl2tiURTC2iOExaUgXIpge6UqHXfsSyKotBpa/ha/Ng9aWXBAU3x9NiHLAFz8SemWXvMrXTo30snJfgLWFvPOMnmxzFavx/VoYcVMp6pAa6d0S5Dq5jufWaEyYa+HvJ31jaqT/ftXL6JFk+oFQerBxnO4bXKXMoY4GKdIoziAiEHTioKZf8FwqAqH/A/V3aqR7bYDSZOdJvElqDX7Cg+s0bWLzqRwcHWpQYYgscguRjvAhtlOdSJ02wG8ha3nn9UohAhb0EyzQGJSKrMg9HPM9G43o/DFVouyRcPTvxjr+ZWsjOtOlUEiDsXHa6rn60/GiLC8rpjRFyqoMxHeIJfIhvAzLUV0xWomRmyL+hTs2ss/HQrXa/50OvI8l8nvnAJ7GpE8milgdI8o/98fSUkHYHQy/G1mP5Xjwwfcz9TLGgwlROkRgj+GNmXCPCn+uIpihJSYbS7jgRnDlKYssC2+b89h9W76GcNi2DUho/RYGTVAO7vLwreE63r7j/9quMTppTjDIbQ6ptWHaG72ct+UgqLPvfLPfV2/N+0kx4P30/iIiKhTCQ2fCfSdOuouWPGSSl03QWLsHavGOrc83kvQBylKkkp3ep8+d8vWgjlgiv1Dn5pAIjfnSwvjMoc+1+N7zCEiwaldxDdhGI0CfZr9Mwz7X6NypgNvWJQh1vr3/eMn4XIRY5/ffxHHZCwddziEt2E6Tb0VnAaMYvW0i4sVMWtflGpNXd3IUgHrUQklK/9f+QZbLFZHzK71gH8HgrJSFOI4zqTT5qogPr/9RY6K5x4rlRD4LqX64klew5e/HjDSRAWB97MG+G2EDJS8ILXoX8zipIh5OvNw9NekIZTFh60Z0FKz9MfneRDvDMqM8QEw/kOsCkSStWTSwmDEiQifCc17LsGUrIY+ENLeBS5nYJdbPAxVuW1kP0QI11RZ7ka09qpm7CbFUJN3jw6vtFlTGwqTbyja5Y1oeZCNqc4oKCZave0a+5mRGJYERFvyhVOMgc6TDc0Nww4UtvIcv2PL5LCBQCGp+/lVtp71nfFJGDs5V3vpU6NhpnaJpf4jJarwijQkTHrvOL6bZCzcBsj3iw3qYSChy776UdYmAR07BVkyj6TLpUbYBRiIywfB9+/1wvaiTjSf/fejqY5Ee791nUfsTpddBOxiS+VoEnvyYijmgJrpCBOxH+G6NJ4Tnc99vbNGEAHUTnXRk0n0as5V1/dWzqv1hDaXOegXKFs+EeCBZsIVez51pzcdaEfpLTrB0SviMXqXFykikH73eakCcTDJvPP95LvMVxKvw6SR728BzBmpEbeVePPTnGocnWNEedZ7JfBasadTA9sLFoW4A5JOwxlr30XY6ByAQzK7fFTPSZdBgcnaKmN3DAT1cR594hrsbf47LFljkc258fPVs91QeTevqMOkmuaSDcI2YoA6XThNtL4JbDzZabLwsCruIQt37V2gCMMlJJmsriGqbXBrGAp6TzPqae7BWVxxuM7mNBRufG/QO2xbG15QpXqz+LdZNkuaUazeNKodUOKN35+vcefBGXGRXJCqvf3rZWJaSRQCeo8KNpFizKiU9HDeHPZLnbr5IJd0QrsVmUSPgLJDMIXdoIxlUs9kvNevPKZOucbIJdqrJ4G7k/8lRdYeVKRYhno2iLTaK1nz+vUj9cvCwzWh1m3s/ZIatJ01+A7d4Dv5k51klXnNkliQR1Or9GjbzVN1oAs0oUxyX+GRm8gDpUQ2n5Nm6gG/hvAFyeuXSgrFIbS3RwESH9A6hVEcH8iD8b789jk1hfEJhsAPX82mIj9KlnWjBvgHSnVip8zBYmnRqw0WF94EXJd6V9lTjroNIe0GvgRxHxtRXwo8BzQVrE4CbZJ66Eb+a3qYlngIuDFlLZqFFpLsylM55q4YXAXnE964o44MyxCf0eLhMKIVTQ7pJXeMhNMm8wMsGEG9qkRKl6L5MnfljR2AQZfzCAs3KtTQy3cmtO0Vdll8KYosvVJN+IaPjCyadXdPwyVvnmezO3X+0mLyP6emwlvivNn1FLmKLL3SpLHfjchwWtEm1FrQeumVTemF/Je0+Mko5DsUb+oqhgD9GE/uFSFTLJeMNjdAvq02bAWZdC1kKiYxSjn/rt+krRoJxi6CQLFF5V/qdTtgKaRAubgd5foO+Yiz4ECMC6iXWUnwQxKRvEFU4bDifZpCVsPSpyRMZEYnlPf7IPoxfsE7tJJfwuCiIKu9YNUQGiC8qZrGzjHiAKyzYTF4nIX9GKrYiGz0qX5eHMGuN1w8rSGDLPu8y+2vyimEvI4x8V6ZOqWoXeLOWvEkDJBMkT63akCZVjXvrsAeYYAbCdc6BBOcRZmvjixb0xvm9TTFs0QrjiwbYN5LdAP6zL16zybEa6mQ1LTnWZniJ/DQxhOu0dotRMtn9MKyniRK/XqExIF4+q5w2xDXLgNanSO5ChiPuKYXedVllVi/XLhfTRoza8WuHhutMbE9HRU8duCezZDdWkYiiPayvIiOWLiHsErQm6oT8mKVbDx61fDkkSt5xjvB594JOiFuQ/j5XzSnJqOAJURYaAsg5V6EG58OTs6iUmCZskB5iVj9n7STKjYl0dO5sH1+69DuKSvEHIE11AGshaQ+A2QtHvv88ahTJJuzbYqngWpGiqNmED9KTog34YuLqoClHN5Nq4hcJBrPDDCTf4F1W3Y9R9gtC91XTPsCvj3WxgQ7IQfp3HHWaz1rYp6Tsd07gxHwpSdpEyTQxIILBC5IzMeR9VnTcV6LxxHspnGjoyUgNyYs+2aK0wdTstLJLyRNfC38YgycBZ+5GD4ER4PVw0wBBsJP0P8RfksjW2HxJ8CM8+kzUTJ4jXclgO2uFBy+nLETVrQikXc4h7lqlbNzOq9u5jPCrGbmPnbQyeq8yvsla4QELEYjBX00ZgM7ozb5UhGfxFn1hMBUeQjzHeu9p6rUh3VWvpa5nAjGBFdySssqhA0Mp9clOt5/0ggkXAZAet+49qmclaUXZAPHIR5Yl6VMepNIVpDdkqZBR2vEFSeU4bwykYOSlG4wDJFtiXcMi6+Z+CRhwA9jItj4wvhNkyhawJl0N0nJe5ORLx4m0Ohd83YonzI+y2nL8N4jOK4/9oiIzazf5o0qk1DaF1O59Pi6GNcmZcOcGZrHHGvZdlBX+p4ncSgyfrBmvVsjCefy61mXB6DVH7kf1sO4K6vrNxVp1sUxSr1xuD/tRvq84xv8BiFmV5WxUY84AAAAASUVORK5CYII=" alt="">
+                <p id="primary-gallery">Bernhardt was a muse and an artist. She studied sculpture with prominent artists and exhibited her works in Paris, London, and New York.</p>
+                <p id="secondary-gallery" class="secondary-text">Tap the images to explore Sarah Bernhardt's work. </p>
+            </div>
+            <div class="text-container three">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABPCAYAAAB1euKZAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAA6MSURBVHgB7VxdchvHEe6eBRjFcpXhR5coGTyBqBMIOoHIKouykwdSj6mUSeEEpE4AQqlUHgU9JI4pV5E6AeETCDoBIYmuPAquyPkxsDPp7tlZLoAFMNhd8MfOV0UtBWCxy97+/bpnEFLw9m+NtSBQDYNYBQP7yw+36/B/eAFHXzh90XgMJmgkXzNheO/mV/U2XEKcfNOolgFqBtWqQvzcoKmigYpRUAGDFfc5NKbLR1KSLr3f08a8MVq3lYHu8u/rHSgIQwL9B91cGAQnox8y2jRvfrnzGC4JWIhLJbUJGrbEiizeGISOAeyh1t3UE5GEbK2uggi3+WjfYGFjmxTneV7FKSX/Eyq1l/YhVPgJXAK8+6ZRwyDYBdZIgB5p43OjsB3+c9BeeVTvwZw4edaolD4urSKYLdLaGgTB1ulBs6tD/eTWV/UWZECsoZO0M0JreWP7EVwQont7BlaQ3xuD++G/sglxGk4Pnm7R92+RUO6y1vZDfW/lq3p3nu+INTSkm4VLBtagpY/VTmhwj/7bJfO+d/PB121YEEhpWnRosWARcLdMCvbDi+bejQc7T3y/Q8W/BcEmXCKwVpavq2PSxj1jzJP+T+GdRQozCRbsjY3tFb4uX5/cwAn7bZ9zVeL3GlwSnH7X3AxL6hV5JAoaJMiHO3tFm7cP+LpBGK6QtkI5UMenf22szjpHBHp6MP2D9KTewDmBTGwXNLZIM16zVi5vFJfSZMFn5EMVpY0UmDsk1Vf8sKd9XgSqDVTPXqITEer0c+4awcIUE+c0bWO7dhFamQYW6o0vttcNmCY/7GlCFYEiKKehFNkG68sPtvf5j4JzBBcUzl9eppw3iZsbO49joU4w/0igkYYqaLs0oaR1C84J4nKoOhPNJL8FlxgsVBJYG8rqMC1QiUAN2opBa/jevfFZIv9CKulgQeBoThZyyK7msmrmKPqlcF0CVUly4yFEGmorIRJcd+T9hQcjrs6oXAR2NXBFsLJe7+kwfESla42rt+R7ybQJBoNBd+TcE1ggxNQRNzXAk3krkouG1Pxk+hioIS1VU89acLokpq6gdctWKFcOZhBSBYXVt980ttxrpaknUNRHOZpPoWCc0k2QqVf7/dC7rPMFl6zla7B2RunZGEFB7zVTdrd+Vz+CAsBaevriaVuVpMps8WtWoKyJOEaNJnzqGa9YFMhUdjWYl0WaepKNkmuAKMXZNRXWUAU7zCgxXdcPwyJczUu6SIOvzQIeMvmyhiHBaRP2ohsrNMq//baxxtppjGpBAWCNPH2x3yBhHkPESElxAsGdfrm8wj/8u1a4Tkzzc7Qk2xaXk9ydgBygiN+SX5Sq8UE01Jm2LpWqdIhLPRJwJwygcCCqLTp0bz38OrfpcdqlAyFRqixIhODxzY0/TipX+fUjoQNLxP0a3CRzPaTKZ2v5i53nkAEc8U9fNDsUD+7Tf/ds2uRMG82QhkouakvQKhQEm3fifS4iICdiYQJWib2vc7m6PFmYMfjvWn6ws8VVmbwwpfLxgTGcv5tVtpTI5EO5Ceq7VFM+3uV/femrWXC8qw7xJeREGKhDJ8zlL7f3YU5wVYYKrJUsDffR5oFTyPISVEWg/TJ0ozfGfaWG13wIVCnzE0zCBEp8FjPukAPCSgGuspZlEWZ8PzrKMlKSdF9oHXblSC5TBMp+AKQqwnGhMW3Fh1TtnR/00O6yr8vDJLGp03dwmdrNW/sLPYjGuglUmQIU6oiZI5cZ56GUa3ZsL2UYlLx2KHry+1XICUuCUCahTS6OM0RY4xYxtURmlqtRKrVJOeiPE7kCtkKEVVTqLuTEWdpkJAJWRn3l4JqN+kVczPGulHC3IQfoXnaAtXNGS4RToiiVWhsYPdEtuMQfClCaM4FSBcGHUV8p7oDpqiiKQQ443lWNcwbeYC2XHFabmUFNldVudOXutASehHAbioDBXixQp4lpvpIcvwSm0jXIFZgc79r/2QbBLIi7C4GamsOeHDZ4ciS6X1OdpAyuBI7usAsZIFMqfLaCM4E6TTTK1MbOCLW9+YxOO4bNInp5ApLTcvx5MPU7rv1nqOqrlD8Kdkc/IzlxoM5eV9l8u7unwYdBZ4gcITP6nqLwzugJrL3lAfQwwCJMI7MwGU7LZ80jcfJOxEUvHrdBeEw1/Bol4VIRcYpIOfFW8pzMRA2K5XZZUYbpO+tHK6P5WJRWdThXy+VHKa0w50BaJzAiIKySIHf5B0aEye2XrEQJ8UqfUxYkbnFIoBFp2nOF/ggkCJR/G2xBVhgsnAacBm42UgCYXaPTZ7K2X9htsK8mPyxuUY1/N7ExxKKPvh6zKgHchwsEEzl89LWU5YeJmn0UrDxcttJnICNcKR2GYZuP44y9DUDVVLPn9CmP2aN5n5cKdHXzPBmHmwBh+k6ES9Qez0n1P4QrecpWgYwwYSfuFo9dnFnog6dvoojeHnmbzb5W+kixeezBvKA8jf7NlcuSYNohVW6RW2r7nhd1cfnnCAqC0IAkDyLK48nE1J4SPcUWsdubo5ooZk9mkpYJeMH2qKqQA5Fg3mS+hwIRzdN2kz2xVIEOlqRMqwS/GR4gY7M31slXsjAzJhrvyUsF8gPne0g2x84bEoyijm3y9VSBOn+pysG4FkRJPpbGE+VZcP4vLxUoD5wejqKkPG85nBVMbMOIdjImtpGlRZrCEbp+dJbgxMwVH9HoGuSAWIrMXmE1rQJaNLh/JR3bMLw3+t5EgcaCSyk3NaIMkkXByRsxc1VAxWW11HSkApoxYlgkhNg29HdTupVWCKgZ579MC063vvj6CLmxR4FhHi0tJPVKfFcw0Ot8H/SE9/P0hHwRj1tO6RJMFWgU1VM10VhnXJlXS5kv4GNwPchHtEBiGJb5gXKQuyU8DWLmbtxySpdgqkCdr0pLUXgOPYuWujFJhVCImSaFyi1h22sqDhzNKS8/ZjOfJUzGLJN3ERXSnr5MoE2gxiYhak2z2a8WFaGdUHmIwS0yyJtS8b3xw7Gz/lCVFSge/SsED7w7aO6TJt4msmEsqhFFdsw+EfrhHd8lflGf5zhr+3ca7JIY2DVSQFALXOtm38CRL5PE96ZK6q40AblvRRY6+Lf2XjThJVC3KCxtzadd8BC8Yq1LE/gk/HDw9IQoL3IdOyuwAAwv4mKYLhrsaJnjGuZko/Y5JepmVdaH8vsIR6Ttz+ddyuMlULlB1kQQSmxMaO++be4Jx6hD0ri6l8bxH0yHZ+w2si4D9EGkDDUSVo3HdYbXeEYgARLxTGWxaSMRHf2fwqOsXQVvgTozTdNS7t8s9YNXpBEVSnbv+JqXdRem2v9J3znvFR/Ofxd93ZlBySGe2E0pOeMRaQ5QAc/L+8ENrF5EtcOCXMRD9BYow5WjaeQGC1yWnACunn771GtOKD6Hqp2sYzCXDXMJ1GlpOUjXKLvkJCoH/97wSvgHZb0n+WygnhU1kHaRmEugAts13JqUQ3I5aPtSQcNH69hd2BwSxV1cFHtUFOYWqCyBJoFNKjk5ySbXIDNHFMQOfbROkn0T1tld8ArkqyzU+TUUbMt1Wslps4A4SB37CHV5o96yzbSrLdRMAnXl6DRiJCGgqq9QubRLCPXVVfSpmQSaJE2maVJCQFXf9eZSL8uCA3vOVYv+mQTKcH2nWfRdUkC+FJushhYGCdkPHxfNIC0S3pVSGt69aB5RfXyXAtXMiRBeSqNU8Mxu8WO89vGIVmsc2ik609UDXS9q0daikE+gU8rRNNhVG/R5ISKg3R+Ej3zK1JgrsGgVsb/SopBLoIxppEkakmuEROs890gaPk/QpnL3+SKJlSyIBeqc/7xP/u13f1pT2hzOu50bPQj2vbsR89PyXSY4Jlg0Pfr9SA/Cl+F/ob0okkXWjy6RZSk7AsQzVml/rwiU+yXSybOvtPsfwnXfG2OmqTxgrnT+CTYrHPGrNbk0+dafP+imz7X53IFSWwpx0wxNo5iO0byiTneJkusMeG7Tk/1yaVpA3QRq0VTc4lseh09sCReDlGBl9LsxZs+TLwIc3djY9t4QQBh9wE2f4JSGUZZ93q3STg/+vAoY8hrPmjJw26SM+7jNBBl2Q8Gz0ffRjQc90aW/d4wcx0gYY024eUx43uCUBqdxZ8HHCjaEs31QfJHY044XhlE/SFUSAqzgyMCajEgyycwbERrNU889VOo+cbUT82YN8ChtnT9KRy9tE6w5Wxr0PV1K9o/y7hsyHnzszolkX80it6Wchbi1k4Jp3U9O7NN7OnMu1SNe8wgV5h7GdQtbeZ6Tu5jMQgGPb/MmVAfNV0wLLnqoQSwO0onyWa1kpGj7fqzH4k6eY99QZ/bUj/m0yEgr0fV6sMZdSBxaT2Q1V6I7QifvRgLiJq7BanIDgxHwZoaPZjXt2OTNlPd7voFGon0/eK8NrhexDj4Nzs+S1q7h6GItmz51eBsMjvBa8xAG9AYwviaKN1rQCFUXycmybscdz3Gwf23KvL4HZgl0ruDEfpS89X7RvfY0uG6mQVibFNkzQ7qg7G7U0bxt5NLMT8wzeo3m/dm6ycUimmRuRT9We3lHCq1roFAW6UZrmibP9HNnwcCPvNUwOceutJDL5fbK+h+6kBGl6EtjIdCTfk2R6hP3xMkc7np/m6G0A4vdn8QXiRn6dtr7J4d/qSb/n0do01DiJwScl4lgybyj7SWlNDTQcKOHXoEGYdVN1102LEqAo1BspvJbCE+Se3WKExYe02+w1i6AYiefbQHqLwXKbYHRN+FYZI6E2vYZWZRNAeBsAdSvFSpamdGblMcFxFnO6h/Jql6ldmTriyu2h13RUBzZOBBN+kDk7J+IlqY0zVhz491pUHbz/lVD9cvhzCQ8Mv2O7MQVDbKyILk6Wroum0/L7jTntYv3ZYaShQTGtGd9kDchtWuDgmdcDFA5+F4YJq61eROqS74z7XnBJvZq9qYq0Zr5O8xdasQa01ySCH/IPkv5S8T/ANVvCGQnJnUlAAAAAElFTkSuQmCC" alt="">
+                <p id="primary-gallery">Bernhardt's fame spread internationally, frequently making headlines in Kansas City. Many dramatized stories and caricatures were published about the star. </p>
+                <p id="secondary-gallery" class="secondary-text">Tap the images to explore Sarah Bernhardt's legacy. </p>
+            </div>
+            
+            <div class="gallery-4 one">
+                <div class="column">
+                    <a id="1-1" onclick="navigate('detail', '1')" class="image-text">
+                        <img src="/mucha-muses/assets/Actress%20home%20screen%201-GC1XkS8V.jpg" alt="">
+                        
+                    </a>
+                    <a id="1-2" onclick="navigate('detail', '2')" class="image-text">
+                        <img src="/mucha-muses/assets/Actress%20home%20screen%202-B3hGvV6B.jpg" alt="">
+                    </a>
+                </div>
+                <div class="column">
+                    <a id="1-3" onclick="navigate('detail', '3')" class="image-text">
+                        <img src="/mucha-muses/assets/Actress%20home%20screen%203-CddGh--H.jpg" alt="">
+                    </a>
+                    <a id="1-4" onclick="navigate('detail', '4')" class="image-text">
+                        <img src="/mucha-muses/assets/Actress%20home%20screen%204-Cj6QtND-.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="gallery-5 two">
+                <div class="column">
+                    <a id="2-1" onclick="navigate('detail', '1')" class="image-text 1">
+                        <img src="/mucha-muses/assets/Artist%20home%20screen%201-CQhghc41.jpg" alt="">
+                    </a>
+                    <a id="2-2" onclick="navigate('detail', '2')" class="image-text 2">
+                        <img src="/mucha-muses/assets/Artist%20home%20screen%202-D4KZc_J-.jpg" alt="">
+                    </a>
+                </div>
+                <a id="2-3" onclick="navigate('detail', '3')" class="image-text tall 3">
+                    <img src="/mucha-muses/assets/Artist%20home%20screen%203-CWRMkvR7.jpg" alt="">
+                </a>
+                <div class="column">
+                    <a id="2-4" onclick="navigate('detail', '4')" class="image-text 4">
+                        <img src="/mucha-muses/assets/Artist%20home%20screen%204-CgamxFV5.jpg" alt="">
+                    </a>
+                    <a id="2-5" onclick="navigate('detail', '5')" class="image-text 5">
+                        <img src="/mucha-muses/assets/Artist%20home%20screen%205-Lfk9JNu8.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="gallery-5 three">
+                <div class="column">
+                    <a id="3-1" onclick="navigate('detail', '1')" class="image-text 1">
+                        <img src="/mucha-muses/assets/Celebrity%20home%20screen%201-BS20yPot.jpg" alt="">
+                    </a>
+                    <a id="3-2" onclick="navigate('detail', '2')" class="image-text 2">
+                        <img src="/mucha-muses/assets/Celebrity%20home%20screen%202-opV6-tXB.jpg" alt="">
+                    </a>
+                </div>
+                <a id="3-3" onclick="navigate('detail', '3')" class="image-text 3 tall">
+                    <img src="/mucha-muses/assets/Celebrity%20home%20screen%203-lXxu30w4.jpg" alt="">
+                </a>
+                <div class="column">
+                    <a id="3-4" onclick="navigate('detail', '4')" class="image-text 4">
+                        <img src="/mucha-muses/assets/Celebrity%20home%20screen%204-BR3Qek3i.jpg" alt="">
+                    </a>
+                    <a id="3-5" onclick="navigate('detail', '5')" class="image-text 5">
+                        <img src="/mucha-muses/assets/Celebrity%20home%20screen%205-BqZJXOL-.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nj-navbar></nj-navbar>
+    </body>
+    <style>
+        html {
+            height: 100vh;
+        }
+        body {
+            font-family: Avenir, sans-serif, Helvetica, Arial;
+        }
+        .show {
+            display: flex !important;
+        }
+        .tall {
+            height: 100%;
+            width: auto;
+            & img {
+                height: 800px !important;
+            }
+        }
+        .column {
+            height: 100%;
+            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .gallery-4, .gallery-5 {
+            display: none;
+            flex-direction: row;
+            margin: 50px 30px 30px 0px;
+            gap: 20px 30px;
+            height: 800px;
+            & .image-text {
+                display: flex;
+                flex-direction: column;
+            }
+            & img {
+                width: 100%;
+            }
+            & p {
+                margin: 0;
+                width: 100%;
+                font-size: 20px;
+                text-align: center;
+                background-color: #F0EADC;
+                &::after {
+                    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAPCAYAAAA2yOUNAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEPSURBVHgBfc+7TsNAEAXQmV0XkaBIwUt2kFwiHpIbpFWqdUeZkjL+Aj4B/sSfECipEJ2lNC4pXThRIE0QBRgiD7OOHDmbxy0sF0d39qI6Uz44GMOcouQtyWBDRAUANTpioAPd3oIoAoSMAIKfeTHYiJKUT8gyNNA0qotubCNpPvkkn3Vc74lK7COC6hx5kH/kryuohu7ByTOivEXAmyaUzdrxdDw5Pfbe+WzPnPYO3c/RdJQI+37rq/UIZN7HTIi7xbpGtK/bxd7vC4/wAYkHUbiGvveLmBCCGlTLOU4N1BVPJ+jZYNmkLtU9gz63zGxQNVUAxIMBpfwLh+kws8dwk8DFD0UMUtiW6/NuADvyDxJnasWcvrpTAAAAAElFTkSuQmCC);
+                    position: absolute;
+                    margin-left: 10px;
+                    margin-top: 2px;
+                }
+            }
+            & a {
+                all: unset;
+            }
+        }
+        .gallery-4 {
+            grid-template-columns: auto auto;
+            & .image-text {
+                width: 404px;
+            }
+            & img {
+                height: 412px;
+            }
+            & p {
+                padding: 15px 0px;
+            }
+        }
+        .gallery-5 {
+            margin-top: 80px;
+            grid-template:
+                "1 3 4"
+                "2 3 5";
+            & .image-text {
+                width: 260px;
+            }
+            & img {
+                height: 385px;
+            }
+            & p {
+                padding: 15px 0px;
+            }
+        }
+        .one {
+
+        }
+        .two {
+
+        }
+        .three {
+            
+        }
+        body {
+            background-color: #382C3A;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .gallery-container {
+            font-size: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            & .text-container {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+                padding: 30px;
+                color: #EFECCD;
+                line-height: 50px;
+                text-wrap: balance;
+                margin-top: 50px;
+                & img {
+                    max-width: 90px;
+                    margin-bottom: 30px;
+                }
+            }
+        }
+        /* If <html> has class "view-one", show elements with class "one" */
+        .view-one .one { display: flex !important; }
+
+        /* If <html> has class "view-two", show elements with class "two" */
+        .view-two .two { display: flex !important; }
+
+        /* If <html> has class "view-three", show elements with class "three" */
+        .view-three .three { display: flex !important; }
+        .secondary-text {
+            font-size: 24px;
+            line-height: 30px;
+        }
+    </style>
+</html>

@@ -2,12 +2,36 @@
 <html lang="en">
     <script type="module" src="/src/nj-image-gallery.js"></script>
     <script type="module" src="/src/nj-navbar.js"></script>
-    <script src="index.js"></script>
+    <script type="module" src="/index.js"></script>
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "v2ixqnuxne");
+      
+        document.addEventListener('click', function(event) {
+            let targetId = event.target.id 
+            if (targetId !== '' || targetId !== null) {
+                if (event.target.tagName.toLowerCase() === 'img') {
+                    clarity("set", "image", targetId);
+                }
+                if (event.target.tagName.toLowerCase() === 'a') {
+                            clarity("set", "link", targetId);
+                        }
+                        if (event.target.tagName.toLowerCase() === 'button') {
+                            clarity("set", "button", targetId);
+                        }
+                if (event.target.tagName.toLowerCase() === 'video') {
+                    clarity("set", "video", targetId);
+                }
+            }
+        });
+    </script>
     <script>
         let galleryNum = sessionStorage.getItem("gallery")
         document.addEventListener('DOMContentLoaded', () => {
             let numberActual = "." + parseNum(galleryNum)
-            console.log(parseNum(galleryNum))
             let galleries = document.querySelectorAll(numberActual)
             console.log(galleries)
             galleries.forEach(element => {
@@ -36,75 +60,62 @@
             
             <div class="gallery-4 one">
                 <div class="column">
-                    <a href="/detail" onclick="navigate('detail', '1')" class="image-text">
-                        <img src="" alt="">
-                        <p>Mucha's first poster of Bernhardt</p>
+                    <a id="1-1" onclick="navigate('detail', '1')" class="image-text">
+                        <img src="public\2. Actress home screen\Actress home screen 1.jpg" alt="">
+                        
                     </a>
-                    <a href="/detail" onclick="navigate('detail', '2')" class="image-text">
-                        <img src="" alt="">
-                        <p>Hear Bernhardt's lyrical voice</p>
+                    <a id="1-2" onclick="navigate('detail', '2')" class="image-text">
+                        <img src="public\2. Actress home screen\Actress home screen 2.jpg" alt="">
                     </a>
                 </div>
                 <div class="column">
-                    <a href="/detail" onclick="navigate('detail', '3')" class="image-text">
-                        <img src="" alt="">
-                        <p>Bernhardt's most popular role</p>
+                    <a id="1-3" onclick="navigate('detail', '3')" class="image-text">
+                        <img src="public\2. Actress home screen\Actress home screen 3.jpg" alt="">
                     </a>
-                    <a href="/detail" onclick="navigate('detail', '4')" class="image-text">
-                        <img src="" alt="">
-                        <p>Bernhardt in <i>Hamlet</i></p>
+                    <a id="1-4" onclick="navigate('detail', '4')" class="image-text">
+                        <img src="public\2. Actress home screen\Actress home screen 4.jpg" alt="">
                     </a>
                 </div>
             </div>
             <div class="gallery-5 two">
                 <div class="column">
-                    <a href="/detail" onclick="navigate('detail', '1')" class="image-text 1">
-                        <img src="" alt="">
-                        <p>Bernhardt's self-portrait</p>
+                    <a id="2-1" onclick="navigate('detail', '1')" class="image-text 1">
+                        <img src="public\3. Artist home screen\Artist home screen 1.jpg" alt="">
                     </a>
-                    <a href="/detail" onclick="navigate('detail', '2')" class="image-text 2">
-                        <img src="" alt="">
-                        <p>Portrait of a lover</p>
+                    <a id="2-2" onclick="navigate('detail', '2')" class="image-text 2">
+                        <img src="public\3. Artist home screen\Artist home screen 2.jpg" alt="">
                     </a>
                 </div>
-                <a href="/detail" onclick="navigate('detail', '3')" class="image-text tall 3">
-                    <img src="" alt="">
-                    <p>Portrait of a lover</p>
+                <a id="2-3" onclick="navigate('detail', '3')" class="image-text tall 3">
+                    <img src="public\3. Artist home screen\Artist home screen 3.jpg" alt="">
                 </a>
                 <div class="column">
-                    <a href="/detail" onclick="navigate('detail', '4')" class="image-text 4">
-                        <img src="" alt="">
-                        <p>Talented in sculpture</p>
+                    <a id="2-4" onclick="navigate('detail', '4')" class="image-text 4">
+                        <img src="public\3. Artist home screen\Artist home screen 4.jpg" alt="">
                     </a>
-                    <a href="/detail" onclick="navigate('detail', '5')" class="image-text 5">
-                        <img src="" alt="">
-                        <p>Lithograph of death</p>
+                    <a id="2-5" onclick="navigate('detail', '5')" class="image-text 5">
+                        <img src="public\3. Artist home screen\Artist home screen 5.jpg" alt="">
                     </a>
                 </div>
             </div>
             <div class="gallery-5 three">
                 <div class="column">
-                    <a href="/detail" onclick="navigate('detail', '1')" class="image-text 1">
-                        <img src="" alt="">
-                        <p>Dead within a year?</p>
+                    <a id="3-1" onclick="navigate('detail', '1')" class="image-text 1">
+                        <img src="public\4. Celebrity home screen\Celebrity home screen 1.jpg" alt="">
                     </a>
-                    <a href="/detail" onclick="navigate('detail', '2')" class="image-text 2">
-                        <img src="" alt="">
-                        <p>Hot-tempered</p>
+                    <a id="3-2" onclick="navigate('detail', '2')" class="image-text 2">
+                        <img src="public/4. Celebrity home screen/Celebrity home screen 2.jpg" alt="">
                     </a>
                 </div>
-                <a href="/detail" onclick="navigate('detail', '3')" class="image-text 3 tall">
-                    <img src="" alt="">
-                    <p>Train cars and pigs</p>
+                <a id="3-3" onclick="navigate('detail', '3')" class="image-text 3 tall">
+                    <img src="public\4. Celebrity home screen\Celebrity home screen 3.jpg" alt="">
                 </a>
                 <div class="column">
-                    <a href="/detail" onclick="navigate('detail', '4')" class="image-text 4">
-                        <img src="" alt="">
-                        <p>Live in KC!</p>
+                    <a id="3-4" onclick="navigate('detail', '4')" class="image-text 4">
+                        <img src="public\4. Celebrity home screen\Celebrity home screen 4.jpg" alt="">
                     </a>
-                    <a href="/detail" onclick="navigate('detail', '5')" class="image-text 5">
-                        <img src="" alt="">
-                        <p>Biggest. Funeral. Ever.</p>
+                    <a id="3-5" onclick="navigate('detail', '5')" class="image-text 5">
+                        <img src="public\4. Celebrity home screen\Celebrity home screen 5.jpg" alt="">
                     </a>
                 </div>
             </div>
@@ -115,6 +126,9 @@
         html {
             height: 100vh;
         }
+        body {
+            font-family: Avenir, sans-serif, Helvetica, Arial;
+        }
         .show {
             display: flex !important;
         }
@@ -122,7 +136,7 @@
             height: 100%;
             width: auto;
             & img {
-                height: 744px !important;
+                height: 800px !important;
             }
         }
         .column {
@@ -168,7 +182,7 @@
                 width: 404px;
             }
             & img {
-                height: 356px;
+                height: 412px;
             }
             & p {
                 padding: 15px 0px;
@@ -183,7 +197,7 @@
                 width: 260px;
             }
             & img {
-                height: 329px;
+                height: 385px;
             }
             & p {
                 padding: 15px 0px;

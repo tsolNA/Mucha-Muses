@@ -1,133 +1,129 @@
 <!doctype html>
-<html lang="en">
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "v2ixqnuxne");
-        
-        document.addEventListener('click', function(event) {
-            let targetId = event.target.id 
-            if (targetId !== '' || targetId !== null) {
-                if (event.target.tagName.toLowerCase() === 'img') {
-                    clarity("set", "image", targetId);
-                }
-                if (event.target.tagName.toLowerCase() === 'a') {
-                    clarity("set", "link", targetId);
-                }
-                if (event.target.tagName.toLowerCase() === 'button') {
-                    clarity("set", "button", targetId);
-                }
-                if (event.target.tagName.toLowerCase() === 'video') {
-                    clarity("set", "video", targetId);
-                }
-            }
-        });
-    </script>
-
-    <script>
-        let galleryNum = sessionStorage.getItem("gallery")
-        let detailNum = sessionStorage.getItem("detail")
-        let loaded = false
-        document.addEventListener('DOMContentLoaded', () => {
-            let selection = document.getElementById("detail-" + galleryNum + "-" + detailNum)
-            selection.classList.add("show")
-            const player = document.querySelector(".audio-player");
-            const audio = player.querySelector(".audio");
-            const playBtn = player.querySelector(".play-btn");
-            const playIcon = player.querySelector(".play-icon");
-            const pauseIcon = player.querySelector(".pause-icon");
-            const seekBar = player.querySelector(".seek-bar");
-            audio.addEventListener("loadedmetadata", () => {
-                seekBar.max = audio.duration;
-            });
-
-            audio.addEventListener("timeupdate", () => {
-                seekBar.value = audio.currentTime;
-                if (seekBar.value == 35.1) {
-                    audio.pause();
-                    playIcon.hidden = false;
-                    pauseIcon.hidden = true;
-                }
-            });
-
-            seekBar.addEventListener("input", () => {
-                audio.currentTime = seekBar.value;
-            });
-            playBtn.addEventListener("click", () => {
-                if (audio.paused) {
-                    if (seekBar.value > 34) {
-                        seekBar.value = 0
-                        audio.currentTime = 0
-                    }
-                    audio.play();
-                    playIcon.hidden = true;
-                    pauseIcon.hidden = false;
-                } else {
-                    audio.pause();
-                    playIcon.hidden = false;
-                    pauseIcon.hidden = true;
-                }
-            });
-        });
-        function resetAudio () {
-            seekBar.value = 0
-        }
-        function testing () {
-            sessionStorage.setItem('gallery', 3); 
-            console.log('changed' + sessionStorage.getItem('gallery'))
-        }
-        function parseSlide() {
-            let getGallery = sessionStorage.getItem('gallery')
-            let getDetail = sessionStorage.getItem('detail')
-            switch (getDetail) {
-                case 1: return
-            }
-        }
-        function changeSlide (element) {
-            const player = document.querySelector(".audio-player");
-            const seekBar = player.querySelector(".seek-bar");
-            const audio = player.querySelector(".audio");
-            const playIcon = player.querySelector(".play-icon");
-            const pauseIcon = player.querySelector(".pause-icon");
-
-            seekBar.value = 0
-            audio.currentTime = 0
-            audio.pause();
-            playIcon.hidden = false;
-            pauseIcon.hidden = true;
-            let previousSlides = document.getElementsByClassName("show")
-            let video = document.getElementById('video')
-            video.currentTime = 0
-            video.pause()
-            document.getElementsByClassName("play-button")[0].classList.add("show-play")
-            for (const el of previousSlides) {
-                el.classList.remove("show")
-            }
+<html lang="en">
+    <head>
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "v2ixqnuxne");
             
-            let selection = document.getElementById("detail-" + element.id)
-            selection.classList.add("show")
-        }
-        function showPlayButton(bool, el) {
-            let playButton = document.getElementsByClassName("play-button")[0]
-            if (bool) {
-                playButton.classList.add("show-play")
-                el.pause()
-            } else {
-                playButton.classList.remove("show-play")
-                el.play()
+            document.addEventListener('click', function(event) {
+                let targetId = event.target.id 
+                if (targetId !== '' || targetId !== null) {
+                    if (event.target.tagName.toLowerCase() === 'img') {
+                        clarity("set", "image", targetId);
+                    }
+                    if (event.target.tagName.toLowerCase() === 'a') {
+                        clarity("set", "link", targetId);
+                    }
+                    if (event.target.tagName.toLowerCase() === 'button') {
+                        clarity("set", "button", targetId);
+                    }
+                    if (event.target.tagName.toLowerCase() === 'video') {
+                        clarity("set", "video", targetId);
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            let galleryNum = sessionStorage.getItem("gallery")
+            let detailNum = sessionStorage.getItem("detail")
+            let loaded = false
+            document.addEventListener('DOMContentLoaded', () => {
+                let selection = document.getElementById("detail-" + galleryNum + "-" + detailNum)
+                selection.classList.add("show")
+                const player = document.querySelector(".audio-player");
+                const audio = player.querySelector(".audio");
+                const playBtn = player.querySelector(".play-btn");
+                const playIcon = player.querySelector(".play-icon");
+                const pauseIcon = player.querySelector(".pause-icon");
+                const seekBar = player.querySelector(".seek-bar");
+                audio.addEventListener("loadedmetadata", () => {
+                    seekBar.max = audio.duration;
+                });
+
+                audio.addEventListener("timeupdate", () => {
+                    seekBar.value = audio.currentTime;
+                    if (seekBar.value == 35.1) {
+                        audio.pause();
+                        playIcon.hidden = false;
+                        pauseIcon.hidden = true;
+                    }
+                });
+
+                seekBar.addEventListener("input", () => {
+                    audio.currentTime = seekBar.value;
+                });
+                playBtn.addEventListener("click", () => {
+                    if (audio.paused) {
+                        if (seekBar.value > 34) {
+                            seekBar.value = 0
+                            audio.currentTime = 0
+                        }
+                        audio.play();
+                        playIcon.hidden = true;
+                        pauseIcon.hidden = false;
+                    } else {
+                        audio.pause();
+                        playIcon.hidden = false;
+                        pauseIcon.hidden = true;
+                    }
+                });
+            });
+            function resetAudio () {
+                seekBar.value = 0
             }
-        }
-        
+            function testing () {
+                sessionStorage.setItem('gallery', 3); 
+                console.log('changed' + sessionStorage.getItem('gallery'))
+            }
+            function parseSlide() {
+                let getGallery = sessionStorage.getItem('gallery')
+                let getDetail = sessionStorage.getItem('detail')
+                switch (getDetail) {
+                    case 1: return
+                }
+            }
+            function changeSlide (element) {
+                const player = document.querySelector(".audio-player");
+                const seekBar = player.querySelector(".seek-bar");
+                const audio = player.querySelector(".audio");
+                const playIcon = player.querySelector(".play-icon");
+                const pauseIcon = player.querySelector(".pause-icon");
 
-        
-
-        
-    </script>
-    <script type="module" crossorigin src="/mucha-muses/assets/index-C92rMK27.js"></script>
-    <script type="module" crossorigin src="/mucha-muses/assets/nj-navbar-sDQh8Vco.js"></script>
-
+                seekBar.value = 0
+                audio.currentTime = 0
+                audio.pause();
+                playIcon.hidden = false;
+                pauseIcon.hidden = true;
+                let previousSlides = document.getElementsByClassName("show")
+                let video = document.getElementById('video')
+                video.currentTime = 0
+                video.pause()
+                document.getElementsByClassName("play-button")[0].classList.add("show-play")
+                for (const el of previousSlides) {
+                    el.classList.remove("show")
+                }
+                
+                let selection = document.getElementById("detail-" + element.id)
+                selection.classList.add("show")
+            }
+            function showPlayButton(bool, el) {
+                let playButton = document.getElementsByClassName("play-button")[0]
+                if (bool) {
+                    playButton.classList.add("show-play")
+                    el.pause()
+                } else {
+                    playButton.classList.remove("show-play")
+                    el.play()
+                }
+            }
+        </script>
+      <script type="module" crossorigin src="/mucha-muses/assets/index-C92rMK27.js"></script>
+      <script type="module" crossorigin src="/mucha-muses/assets/nj-navbar-sDQh8Vco.js"></script>
+    </head>
     <body>
         <div id="detail-1-1" class="image-container">
             <img src="/mucha-muses/assets/1-1-Cs6oZnYi.jpg" alt="">
@@ -173,8 +169,10 @@
                     </div>
                     <p class="primary-text">
                         Tap the icon to hear Bernhardt perform in <i>La Samaritaine</i> (The Samaritan Woman). <br><br>
-                        <i>This recording features Bernhardt performing a short passage from <i>La Samaritaine</i> in French. Her voice is light and melodic, with a steady rhythm that carries the emotion of the scene. Her expressive delivery gives a sense of why non-French speaking audiences were so drawn to her performances.</i> </p>
-                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha, <i>La Samaritaine</i>, 1897, color lithograph, 67 1/2 x 23 1/2 in., The Nelson-Atkins Museum of Art, gift of Mr. and Mrs. Milton McGreevy, Westport Fund, F62-42. <br><br> Sarah Bernhardt, "La Samaritaine. 1er acte," <i>The Edison Phonograph Monthly</i>, v. 8, released 1910, 3:52. Courtesy of University of California, Santa Barbara Library. </p>
+                        <i>This recording features Bernhardt performing a short passage from <i>La Samaritaine</i> in French. Her voice is light and melodic, with a steady rhythm that carries the emotion of the scene. Her expressive delivery gives a sense of why non-French-speaking audiences were so drawn to her performances.</i> </p>
+                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha (Czech, 1860&ndash;1939). <i>Sarah Bernhardt as La Samaritaine</i>, 1897. Color lithographed poster; mounted on linen. 67 1/2 &times; 23 1/2 inches (171.5 &times; 59.7 cm). 
+
+Gift of Mr. and Mrs. Milton McGreevy through the Westport Fund, F62-42.  <br><br> Sarah Bernhardt, "La Samaritaine. 1er acte," <i>The Edison Phonograph Monthly</i>, v. 8, released 1910, 3:52. Courtesy of University of California, Santa Barbara Library. </p>
                 </div>
                 <div class="slide-controls">
                     <img id="1-1" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
@@ -198,12 +196,12 @@
             </div>
         </div>
         <div id="detail-1-4" class="image-container">
-            <video id="video" muted onclick="this.paused ? showPlayButton(false, this) : showPlayButton(true, this);" src="details\video.mp4"></video>
+            <video id="video" muted loop onclick="this.paused ? showPlayButton(false, this) : showPlayButton(true, this);" src="details\video.mp4"></video>
             <img class="play-button show-play" src="data:image/png;base64,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" alt="">
             <div class="text-container">
                 <div class="text-actual">
                     <p id="primary-gallery" class="primary-text">Bernhardt (left) playing the part of Hamlet (1899) <br><br> Though Bernhardt began acting in female roles, she gained fame for playing masculine parts called "trouser roles" that showed her physicality and dramatic power. </p>
-                    <p id="secondary-gallery" class="secondary-text">"Le duel d'Hamlet,"" directed by Cl&#233;ment-Maurice Gratioulet, performances by Sarah Bernhardt, Pierre Magnier, and Suzanne Seylor, Soc. Phono-Cin&#233;ma-Th&#233;&acirc;tre, 1900. <br><br> Credit for Hamlet image: James Lafayette, Irish, 1853-1923, Sarah Bernhardt as Hamlet, about 1885-1900, photochemical print, Library of Congress. </p>
+                    <p id="secondary-gallery" class="secondary-text">"Le duel d'Hamlet," directed by Cl&#233;ment-Maurice Gratioulet, performances by Sarah Bernhardt, Pierre Magnier, and Suzanne Seylor, Soc. Phono-Cin&#233;ma-Th&#233;&acirc;tre, 1900. <br><br> James Lafayette, Irish, 1853&ndash;1923, <i>Sarah Bernhardt as Hamlet</i>, about 1885&ndash;1900, photochemical print, Library of Congress. </p>
                 </div>
                 <div class="slide-controls">
                     <img id="1-3" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">
@@ -231,7 +229,7 @@
             <img src="/mucha-muses/assets/2-2-BLBhMy1r.jpg" alt="">
             <div class="text-container">
                 <div class="text-actual">
-                    <p id="primary-gallery" class="primary-text">Bernhardt was friends with many artists, including painter Louise Abb&#233;ma (1853-1927). Their friendship deepened into a romantic relationship, and they often depicted each other in their work. </p>
+                    <p id="primary-gallery" class="primary-text">Bernhardt was friends with many artists, including painter Louise Abb&#233;ma (1853&ndash;1927). Their friendship deepened into a romantic relationship, and they often depicted each other in their work. </p>
                     <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Bust of Louise Abb&#233;ma</i>, 1878, marble, 16 1/2 x 10 5/8 x 8 11/16 in., Mus&#233;e d'Orsay, Paris. </p>
                 </div>
                 <div class="slide-controls">
@@ -340,7 +338,7 @@
             <div class="text-container">
                 <div class="text-actual">
                     <p id="primary-gallery" class="primary-text">In 1906, during Bernhardt's third stop in Kansas City, she performed <i>La Dame aux Camelias</i> (The Lady of the Camellias) at Convention Hall. It broke all records as the largest known indoor audience for dramatic theater anywhere in the world.  </p>
-                    <p id="secondary-gallery" class="secondary-text">Reproduced in Felicia Hardison Londr&#233;, <i>The Enchanted Years of the Stage: Kansas City at the Crossroads of American Theater, 1870-1930</i>, University of Missouri, 2007.  </p>
+                    <p id="secondary-gallery" class="secondary-text">Reproduced in Felicia Hardison Londr&#233;, <i>The Enchanted Years of the Stage: Kansas City at the Crossroads of American Theater, 1870&ndash;1930</i>, University of Missouri, 2007.  </p>
                 </div>
                 <div class="slide-controls">
                     <img id="3-3" class="left-button" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVRSURBVHgBxVpLcttGEO0ekN5kYWJhOdlRFSlbMScwdALJJ5B0AkknsHQC0ycQfQLbJzB0gtBbiywyK1uUU4ASV+KEBDrdg49AiDSJISC+KhZBEDPzuns+PW+AUAI8b9CA8XhfgbVDRE1AaAFiA4gamceG8kHAbkh0CY+srm1vDmFFIBhCSKtJeMyEHf7pgBGwS0CvoG65psYUNoCJN9WYiSMcph5G9AHIJcBLQBrC2OrCN/DtzU1flxlwhH4AjsyEn1ctBHrGhZxshJhIJ6xb50UNWdqA1OMAJ5mGXUI6h6+1bkK2CLxR7xAR9oBgP77lI2L78ZOfz5etYykDxOs4Dt+zl5txqbc0sU7tn1bvw7r+T4MmqPEZojqIaQ2prnaXicZCA/78MjgIKWxHXueKMTyyn2y7UAG8L719DPFl7CifCI7sp1tvwRS3N/0X/qhH8vE+99q6L1cM6are9cdO0q5wABNMkb++OoMHhrR557yrk0KFb/8YHK+TfIIpI657+8sV4gHr3/S9dZNP+dwZ4Qm3hQX8UX+Q9HkoETIZ3N5cvQQD3I2J/m/5/1T2RzRgZAbAIfxjnUFJ0DNZGHSI8OR21LuAonhUP9GcgFr58ZBOo9FcHwzkmiD81d74pQslICGfa7TzeGPrCArAu7lykJDXIp5e69YmrxF64UwjoMbBi6TyKskLOJn7HQoiXnvk04D/JmkUdASmvB+wdSWssPPIc/J3bj/dPgMDzIpCFIFx4OjKQ3pXKfmQTk3JC6ai8O/kUO5pAziBOtZP1LADK2IueeC04MftlWc2Hp+v5RsV7unvTPfxGxtbNqyA75Lf2OpACZBUgxNL5ksN7ka2ynSfS1gBD0FeEM0+FE0yQeBIF2rF/7lgCEk9HoJ8pt4P+mICjuJpaEf/sMBo6pTFj4KgPaORSshrqMTZ1JQINKNrKryj0uSJzvL3KyUvCK2hfPFA3kkNKLp4rY28IIDU2QoM4I0GrVnko1W8YvKMzFrVNDLA3tjsiqfz9/neocxG8IBgAzCSPrxi20Xx9CwjZDaq2ggtAkQYsgHx4P0Ghfe7azPCSrgi50IYT5/1oAUGWIsRKmhGF+Qrli6i1HYSaz4G+J4RkkFC2QhIO5tC+MBdKNQRSJIjU2gjQjzN3+f09403+mgU3Xng5POZvqiBi1FyFHiQ2+mYQjbh3EBey/E5i9wtY6OU4Qs6mYsJuyA59mSysqck35dNS+52A0G9LyUS4yCRV9x0Q0OI7+Sbw22mguVQpRG8WOqJgcec3hdEC1lNdeL1wClr0FVhRKwLOVqhqFtaM9UGSCiIwldyXVYUdL1zjbCKSysMnARaV2Kur++pEvCo1i47CoL7RrDCHajnUBBylhCdI7D3w1pn9kOpjNcfFE0tFhLQdXO9n5aQB/NlRe5MFcMFQq/Id1rWNlHQFhExlOf9m96bxLH5/+5lo1F40ZfM0libnwOTYyjNIe46zG13qUJyUrLyAUMJmDqjKDouvc/9k3UaMUVeBrAJsgcMMibKHtgz2+Q27vr8YvILD/nig7cLEZJ0PwTWNivaNkbap7rQEj/KOAyfLzpQXO6Ylac+tO6OWU0PpefWH4m20k2d+JbLIvPRMjptoZP6KNOUs9x07+DqnISX9aJZbPJ+BacWBylx8XoQnhfRUIu/apAcSitrL/cyh0vyEgdgFzAcQlD3Ew/qMtZYnm3pF0L4pIXJtrKvKlDIqczftXbRqdb8ZQ9NKnDi7NABM7g6E/6qOiZrhMDYgCy0MbKnZq0SlUiV2IgGfaz6Ra/aSGtdCngLyzsp+MtyTUln8T9frdHCglpF5AAAAABJRU5ErkJggg==" onclick="changeSlide(this)" alt="">

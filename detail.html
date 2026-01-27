@@ -1,135 +1,132 @@
 <!doctype html>
 <html lang="en">
-    <script type="module" src="/src/nj-image-gallery.js"></script>
-    <script type="module" src="/src/nj-navbar.js"></script>
-    <script type="module" src="/index.js">
-        import videoURL from '/video.mp4'
-    </script>
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "v2ixqnuxne");
-        
-        document.addEventListener('click', function(event) {
-            let targetId = event.target.id 
-            if (targetId !== '' || targetId !== null) {
-                if (event.target.tagName.toLowerCase() === 'img') {
-                    clarity("set", "image", targetId);
-                }
-                if (event.target.tagName.toLowerCase() === 'a') {
-                    clarity("set", "link", targetId);
-                }
-                if (event.target.tagName.toLowerCase() === 'button') {
-                    clarity("set", "button", targetId);
-                }
-                if (event.target.tagName.toLowerCase() === 'video') {
-                    clarity("set", "video", targetId);
-                }
-            }
-        });
-    </script>
-
-    <script>
-        let galleryNum = sessionStorage.getItem("gallery")
-        let detailNum = sessionStorage.getItem("detail")
-        let loaded = false
-        document.addEventListener('DOMContentLoaded', () => {
-            let selection = document.getElementById("detail-" + galleryNum + "-" + detailNum)
-            selection.classList.add("show")
-            const player = document.querySelector(".audio-player");
-            const audio = player.querySelector(".audio");
-            const playBtn = player.querySelector(".play-btn");
-            const playIcon = player.querySelector(".play-icon");
-            const pauseIcon = player.querySelector(".pause-icon");
-            const seekBar = player.querySelector(".seek-bar");
-            audio.addEventListener("loadedmetadata", () => {
-                seekBar.max = audio.duration;
-            });
-
-            audio.addEventListener("timeupdate", () => {
-                seekBar.value = audio.currentTime;
-                if (seekBar.value == 35.1) {
-                    audio.pause();
-                    playIcon.hidden = false;
-                    pauseIcon.hidden = true;
-                }
-            });
-
-            seekBar.addEventListener("input", () => {
-                audio.currentTime = seekBar.value;
-            });
-            playBtn.addEventListener("click", () => {
-                if (audio.paused) {
-                    if (seekBar.value > 34) {
-                        seekBar.value = 0
-                        audio.currentTime = 0
-                    }
-                    audio.play();
-                    playIcon.hidden = true;
-                    pauseIcon.hidden = false;
-                } else {
-                    audio.pause();
-                    playIcon.hidden = false;
-                    pauseIcon.hidden = true;
-                }
-            });
-        });
-        function resetAudio () {
-            seekBar.value = 0
-        }
-        function testing () {
-            sessionStorage.setItem('gallery', 3); 
-            console.log('changed' + sessionStorage.getItem('gallery'))
-        }
-        function parseSlide() {
-            let getGallery = sessionStorage.getItem('gallery')
-            let getDetail = sessionStorage.getItem('detail')
-            switch (getDetail) {
-                case 1: return
-            }
-        }
-        function changeSlide (element) {
-            const player = document.querySelector(".audio-player");
-            const seekBar = player.querySelector(".seek-bar");
-            const audio = player.querySelector(".audio");
-            const playIcon = player.querySelector(".play-icon");
-            const pauseIcon = player.querySelector(".pause-icon");
-
-            seekBar.value = 0
-            audio.currentTime = 0
-            audio.pause();
-            playIcon.hidden = false;
-            pauseIcon.hidden = true;
-            let previousSlides = document.getElementsByClassName("show")
-            let video = document.getElementById('video')
-            video.currentTime = 0
-            video.pause()
-            document.getElementsByClassName("play-button")[0].classList.add("show-play")
-            for (const el of previousSlides) {
-                el.classList.remove("show")
-            }
+    <head>
+        <script type="module" src="/src/nj-image-gallery.js"></script>
+        <script type="module" src="/src/nj-navbar.js"></script>
+        <script type="module" src="/index.js">
+            import videoURL from '/video.mp4'
+        </script>
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "v2ixqnuxne");
             
-            let selection = document.getElementById("detail-" + element.id)
-            selection.classList.add("show")
-        }
-        function showPlayButton(bool, el) {
-            let playButton = document.getElementsByClassName("play-button")[0]
-            if (bool) {
-                playButton.classList.add("show-play")
-                el.pause()
-            } else {
-                playButton.classList.remove("show-play")
-                el.play()
+            document.addEventListener('click', function(event) {
+                let targetId = event.target.id 
+                if (targetId !== '' || targetId !== null) {
+                    if (event.target.tagName.toLowerCase() === 'img') {
+                        clarity("set", "image", targetId);
+                    }
+                    if (event.target.tagName.toLowerCase() === 'a') {
+                        clarity("set", "link", targetId);
+                    }
+                    if (event.target.tagName.toLowerCase() === 'button') {
+                        clarity("set", "button", targetId);
+                    }
+                    if (event.target.tagName.toLowerCase() === 'video') {
+                        clarity("set", "video", targetId);
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            let galleryNum = sessionStorage.getItem("gallery")
+            let detailNum = sessionStorage.getItem("detail")
+            let loaded = false
+            document.addEventListener('DOMContentLoaded', () => {
+                let selection = document.getElementById("detail-" + galleryNum + "-" + detailNum)
+                selection.classList.add("show")
+                const player = document.querySelector(".audio-player");
+                const audio = player.querySelector(".audio");
+                const playBtn = player.querySelector(".play-btn");
+                const playIcon = player.querySelector(".play-icon");
+                const pauseIcon = player.querySelector(".pause-icon");
+                const seekBar = player.querySelector(".seek-bar");
+                audio.addEventListener("loadedmetadata", () => {
+                    seekBar.max = audio.duration;
+                });
+
+                audio.addEventListener("timeupdate", () => {
+                    seekBar.value = audio.currentTime;
+                    if (seekBar.value == 35.1) {
+                        audio.pause();
+                        playIcon.hidden = false;
+                        pauseIcon.hidden = true;
+                    }
+                });
+
+                seekBar.addEventListener("input", () => {
+                    audio.currentTime = seekBar.value;
+                });
+                playBtn.addEventListener("click", () => {
+                    if (audio.paused) {
+                        if (seekBar.value > 34) {
+                            seekBar.value = 0
+                            audio.currentTime = 0
+                        }
+                        audio.play();
+                        playIcon.hidden = true;
+                        pauseIcon.hidden = false;
+                    } else {
+                        audio.pause();
+                        playIcon.hidden = false;
+                        pauseIcon.hidden = true;
+                    }
+                });
+            });
+            function resetAudio () {
+                seekBar.value = 0
             }
-        }
-        
+            function testing () {
+                sessionStorage.setItem('gallery', 3); 
+                console.log('changed' + sessionStorage.getItem('gallery'))
+            }
+            function parseSlide() {
+                let getGallery = sessionStorage.getItem('gallery')
+                let getDetail = sessionStorage.getItem('detail')
+                switch (getDetail) {
+                    case 1: return
+                }
+            }
+            function changeSlide (element) {
+                const player = document.querySelector(".audio-player");
+                const seekBar = player.querySelector(".seek-bar");
+                const audio = player.querySelector(".audio");
+                const playIcon = player.querySelector(".play-icon");
+                const pauseIcon = player.querySelector(".pause-icon");
 
-        
-
-        
-    </script>
+                seekBar.value = 0
+                audio.currentTime = 0
+                audio.pause();
+                playIcon.hidden = false;
+                pauseIcon.hidden = true;
+                let previousSlides = document.getElementsByClassName("show")
+                let video = document.getElementById('video')
+                video.currentTime = 0
+                video.pause()
+                document.getElementsByClassName("play-button")[0].classList.add("show-play")
+                for (const el of previousSlides) {
+                    el.classList.remove("show")
+                }
+                
+                let selection = document.getElementById("detail-" + element.id)
+                selection.classList.add("show")
+            }
+            function showPlayButton(bool, el) {
+                let playButton = document.getElementsByClassName("play-button")[0]
+                if (bool) {
+                    playButton.classList.add("show-play")
+                    el.pause()
+                } else {
+                    playButton.classList.remove("show-play")
+                    el.play()
+                }
+            }
+        </script>
+    </head>
     <body>
         <div id="detail-1-1" class="image-container">
             <img src="public\details\1-1.jpg" alt="">
@@ -175,8 +172,10 @@
                     </div>
                     <p class="primary-text">
                         Tap the icon to hear Bernhardt perform in <i>La Samaritaine</i> (The Samaritan Woman). <br><br>
-                        <i>This recording features Bernhardt performing a short passage from <i>La Samaritaine</i> in French. Her voice is light and melodic, with a steady rhythm that carries the emotion of the scene. Her expressive delivery gives a sense of why non-French speaking audiences were so drawn to her performances.</i> </p>
-                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha, <i>La Samaritaine</i>, 1897, color lithograph, 67 1/2 x 23 1/2 in., The Nelson-Atkins Museum of Art, gift of Mr. and Mrs. Milton McGreevy, Westport Fund, F62-42. <br><br> Sarah Bernhardt, "La Samaritaine. 1er acte," <i>The Edison Phonograph Monthly</i>, v. 8, released 1910, 3:52. Courtesy of University of California, Santa Barbara Library. </p>
+                        <i>This recording features Bernhardt performing a short passage from <i>La Samaritaine</i> in French. Her voice is light and melodic, with a steady rhythm that carries the emotion of the scene. Her expressive delivery gives a sense of why non-French-speaking audiences were so drawn to her performances.</i> </p>
+                    <p id="secondary-gallery" class="secondary-text">Alphonse Mucha (Czech, 1860&ndash;1939). <i>Sarah Bernhardt as La Samaritaine</i>, 1897. Color lithographed poster; mounted on linen. 67 1/2 &times; 23 1/2 inches (171.5 &times; 59.7 cm). 
+
+Gift of Mr. and Mrs. Milton McGreevy through the Westport Fund, F62-42.  <br><br> Sarah Bernhardt, "La Samaritaine. 1er acte," <i>The Edison Phonograph Monthly</i>, v. 8, released 1910, 3:52. Courtesy of University of California, Santa Barbara Library. </p>
                 </div>
                 <div class="slide-controls">
                     <img id="1-1" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
@@ -200,12 +199,12 @@
             </div>
         </div>
         <div id="detail-1-4" class="image-container">
-            <video id="video" muted onclick="this.paused ? showPlayButton(false, this) : showPlayButton(true, this);" src="details\video.mp4"></video>
+            <video id="video" muted loop onclick="this.paused ? showPlayButton(false, this) : showPlayButton(true, this);" src="details\video.mp4"></video>
             <img class="play-button show-play" src="public\Video play button\Video play button.png" alt="">
             <div class="text-container">
                 <div class="text-actual">
                     <p id="primary-gallery" class="primary-text">Bernhardt (left) playing the part of Hamlet (1899) <br><br> Though Bernhardt began acting in female roles, she gained fame for playing masculine parts called "trouser roles" that showed her physicality and dramatic power. </p>
-                    <p id="secondary-gallery" class="secondary-text">"Le duel d'Hamlet,"" directed by Cl&#233;ment-Maurice Gratioulet, performances by Sarah Bernhardt, Pierre Magnier, and Suzanne Seylor, Soc. Phono-Cin&#233;ma-Th&#233;&acirc;tre, 1900. <br><br> Credit for Hamlet image: James Lafayette, Irish, 1853-1923, Sarah Bernhardt as Hamlet, about 1885-1900, photochemical print, Library of Congress. </p>
+                    <p id="secondary-gallery" class="secondary-text">"Le duel d'Hamlet," directed by Cl&#233;ment-Maurice Gratioulet, performances by Sarah Bernhardt, Pierre Magnier, and Suzanne Seylor, Soc. Phono-Cin&#233;ma-Th&#233;&acirc;tre, 1900. <br><br> James Lafayette, Irish, 1853&ndash;1923, <i>Sarah Bernhardt as Hamlet</i>, about 1885&ndash;1900, photochemical print, Library of Congress. </p>
                 </div>
                 <div class="slide-controls">
                     <img id="1-3" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
@@ -233,7 +232,7 @@
             <img src="public\details\2-2.jpg" alt="">
             <div class="text-container">
                 <div class="text-actual">
-                    <p id="primary-gallery" class="primary-text">Bernhardt was friends with many artists, including painter Louise Abb&#233;ma (1853-1927). Their friendship deepened into a romantic relationship, and they often depicted each other in their work. </p>
+                    <p id="primary-gallery" class="primary-text">Bernhardt was friends with many artists, including painter Louise Abb&#233;ma (1853&ndash;1927). Their friendship deepened into a romantic relationship, and they often depicted each other in their work. </p>
                     <p id="secondary-gallery" class="secondary-text">Sarah Bernhardt, <i>Bust of Louise Abb&#233;ma</i>, 1878, marble, 16 1/2 x 10 5/8 x 8 11/16 in., Mus&#233;e d'Orsay, Paris. </p>
                 </div>
                 <div class="slide-controls">
@@ -342,7 +341,7 @@
             <div class="text-container">
                 <div class="text-actual">
                     <p id="primary-gallery" class="primary-text">In 1906, during Bernhardt's third stop in Kansas City, she performed <i>La Dame aux Camelias</i> (The Lady of the Camellias) at Convention Hall. It broke all records as the largest known indoor audience for dramatic theater anywhere in the world.  </p>
-                    <p id="secondary-gallery" class="secondary-text">Reproduced in Felicia Hardison Londr&#233;, <i>The Enchanted Years of the Stage: Kansas City at the Crossroads of American Theater, 1870-1930</i>, University of Missouri, 2007.  </p>
+                    <p id="secondary-gallery" class="secondary-text">Reproduced in Felicia Hardison Londr&#233;, <i>The Enchanted Years of the Stage: Kansas City at the Crossroads of American Theater, 1870&ndash;1930</i>, University of Missouri, 2007.  </p>
                 </div>
                 <div class="slide-controls">
                     <img id="3-3" class="left-button" src="public\Navigation buttons\Left arrow button.png" onclick="changeSlide(this)" alt="">
